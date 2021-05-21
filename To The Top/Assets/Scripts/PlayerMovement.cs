@@ -39,12 +39,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (rotateLeftFlag)
         {
-            transform.RotateAround(table.transform.position, Vector3.up, rotationSpeed * Time.deltaTime * -1f);
+            transform.RotateAround(table.transform.position, Vector3.up, rotationSpeed * Time.deltaTime);
         }
 
         if (rotateRightFlag)
         {
-            transform.RotateAround(table.transform.position, Vector3.up, rotationSpeed * Time.deltaTime);
+            transform.RotateAround(table.transform.position, Vector3.up, rotationSpeed * Time.deltaTime * -1f);
         }
 
         if (moveUpFlag)
