@@ -31,11 +31,6 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        Debug.Log("rotateLeftFlag: " + rotateLeftFlag);
-        Debug.Log("rotateRightFlag: " + rotateRightFlag);
-        Debug.Log("moveUpFlag: " + moveUpFlag);
-        Debug.Log("moveDownFlag: " + moveDownFlag);
-        Debug.Log("position: " + transform.position);
 
         if (rotateLeftFlag)
         {
