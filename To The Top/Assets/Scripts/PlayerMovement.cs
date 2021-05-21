@@ -2,8 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Attach this script to the Leap Rig (Parent of Main Camera, Interaction Manager, etc).
+ * Make the corresponding movement buttons also a child of the Leap Rig.
+ * Causes left and right buttons to make player rotate around the table and up and down buttons to pan camera vertically.
+ */
+
 public class PlayerMovement : MonoBehaviour
 {
+    [Tooltip("Table for player to revolve around")]
     public GameObject table;
     public float rotationSpeed = 25f;
     public float moveSpeed = 0.75f;
@@ -51,10 +58,6 @@ public class PlayerMovement : MonoBehaviour
             Vector3 moveVector = new Vector3(0f, moveSpeed * Time.deltaTime * -1f, 0f);
             transform.position += moveVector;
         }
-
-       
-
-
 
     }
 
