@@ -7,6 +7,7 @@ TagManager:
   - BlockInSpawn
   - BlockInPlay
   - BlockInHand
+  - Table
   layers:
   - Default
   - TransparentFX

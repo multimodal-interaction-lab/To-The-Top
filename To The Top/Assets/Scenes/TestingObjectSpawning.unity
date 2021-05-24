@@ -498,6 +498,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a84c5221b77780b459ac981c2583e1e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectsToSpawn:
+  - {fileID: 4666272775720269085, guid: 3317abff4b5789c4aad812e869fe6de4, type: 3}
+  - {fileID: 1325095286254662561, guid: 118ec86c43e19c240b057b8ff11e95b3, type: 3}
 --- !u!4 &371171630
 Transform:
   m_ObjectHideFlags: 0
@@ -506,7 +509,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 371171628}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.01896219, y: 1.2701371, z: 1.251}
+  m_LocalPosition: {x: 0.657, y: 1.482, z: 0.834}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2184,7 +2187,7 @@ PrefabInstance:
     - target: {fileID: 4666272775720269076, guid: 3317abff4b5789c4aad812e869fe6de4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.519
+      value: 0.312
       objectReference: {fileID: 0}
     - target: {fileID: 4666272775720269076, guid: 3317abff4b5789c4aad812e869fe6de4,
         type: 3}
@@ -2239,7 +2242,7 @@ PrefabInstance:
     - target: {fileID: 4666272775720269085, guid: 3317abff4b5789c4aad812e869fe6de4,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3317abff4b5789c4aad812e869fe6de4, type: 3}
