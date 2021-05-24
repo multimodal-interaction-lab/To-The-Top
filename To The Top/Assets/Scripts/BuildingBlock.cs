@@ -5,26 +5,43 @@ using UnityEngine;
 public class BuildingBlock : MonoBehaviour
 {
 
-    
+    Rigidbody rigidbody;
     void Start()
     {
+        rigidbody = GetComponent<Rigidbody>();
         Spawn();
     }
 
-   
+
     void FixedUpdate()
     {
-        
+        Debug.Log("Rigidbody kinematic: " + rigidbody.isKinematic);
     }
 
-    public void BlockTaken()
+    public void BlockGrasped()
     {
+        gameObject.tag = "BlockInHand";
+        rigidbody.isKinematic = false;
+
         // Call parent spawn point to generate another block as replacement
-        if(transform.parent != null)
+        if (transform.parent != null)
         {
-            BlockGenerator blockGenerator = gameObject.GetComponentInParent(typeof(BlockGenerator)) as BlockGenerator;
-            blockGenerator.SpawnObject();
+            StartCoroutine(RequestReplacementCoroutine());
         }
+
+    }
+    IEnumerator RequestReplacementCoroutine()
+    {
+        // Wait before calling the BlockGenerator spawn
+        yield return new WaitForSeconds(0.5f);
+        BlockGenerator blockGenerator = gameObject.GetComponentInParent(typeof(BlockGenerator)) as BlockGenerator;
+        blockGenerator.SpawnObject();
+        yield return null;
+    }
+    public void BlockReleased()
+    {
+        gameObject.tag = "BlockInPlay";
+        rigidbody.isKinematic = false;
     }
 
     // Block will grow

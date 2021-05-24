@@ -19,6 +19,6 @@ public class BlockGenerator : MonoBehaviour
 
     public void SpawnObject()
     {
-        spawnedObjects.Add(Instantiate(objectsToSpawn[0], transform.position, transform.rotation, transform));
+        spawnedObjects.Add(Instantiate(objectsToSpawn[1], transform.position, transform.rotation, transform));
     }
 }
