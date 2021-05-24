@@ -20,15 +20,18 @@ public class BuildingBlock : MonoBehaviour
 
     public void BlockGrasped()
     {
-        gameObject.tag = "BlockInHand";
-        rigidbody.isKinematic = false;
-
         // Call parent spawn point to generate another block as replacement
         if (transform.parent != null)
         {
-            StartCoroutine(RequestReplacementCoroutine());
+            if (gameObject.tag.Equals("BlockInSpawn"))
+            {
+                // Only spawn replacement if taking from spawn point
+                StartCoroutine(RequestReplacementCoroutine());
+            }
         }
 
+        gameObject.tag = "BlockInHand";
+        rigidbody.isKinematic = false;
     }
     IEnumerator RequestReplacementCoroutine()
     {
