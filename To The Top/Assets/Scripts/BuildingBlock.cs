@@ -15,7 +15,6 @@ public class BuildingBlock : MonoBehaviour
 
     void FixedUpdate()
     {
-        Debug.Log("Rigidbody kinematic: " + rigidbody.isKinematic);
     }
 
     public void BlockGrasped()
