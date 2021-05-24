@@ -6,6 +6,7 @@ public class BuildingBlock : MonoBehaviour
 {
 
     Rigidbody rigidbody;
+    bool unplaced = true;
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
@@ -19,15 +20,7 @@ public class BuildingBlock : MonoBehaviour
 
     public void BlockGrasped()
     {
-        // Call parent spawn point to generate another block as replacement
-        if (transform.parent != null)
-        {
-            if (gameObject.tag.Equals("BlockInSpawn"))
-            {
-                // Only spawn replacement if taking from spawn point
-                StartCoroutine(RequestReplacementCoroutine());
-            }
-        }
+        
 
         gameObject.tag = "BlockInHand";
         rigidbody.isKinematic = false;
@@ -42,8 +35,18 @@ public class BuildingBlock : MonoBehaviour
     }
     public void BlockReleased()
     {
+        // Call parent spawn point to generate another block as replacement
+        if (transform.parent != null)
+        {
+            if (unplaced)
+            {
+                // Only spawn replacement if taking from spawn point
+                StartCoroutine(RequestReplacementCoroutine());
+            }
+        }
         gameObject.tag = "BlockInPlay";
         rigidbody.isKinematic = false;
+        unplaced = false;
     }
 
     // Block will grow
