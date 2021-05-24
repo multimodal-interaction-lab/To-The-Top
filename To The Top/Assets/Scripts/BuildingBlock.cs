@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class BuildingBlock : MonoBehaviour
 {
-    // Start is called before the first frame update
+
+    
     void Start()
     {
-        
     }
 
-    // Update is called once per frame
-    void Update()
+   
+    void FixedUpdate()
     {
-        
+        Rigidbody rigbody = gameObject.GetComponent(typeof(Rigidbody)) as Rigidbody;
+
+        Debug.Log("Tag: " + gameObject.tag);
+        Debug.Log("Kinematic: " + rigbody.isKinematic);
     }
 
 
