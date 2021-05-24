@@ -35,7 +35,7 @@ public class BuildingBlock : MonoBehaviour
     IEnumerator RequestReplacementCoroutine()
     {
         // Wait before calling the BlockGenerator spawn
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.8f);
         BlockGenerator blockGenerator = gameObject.GetComponentInParent(typeof(BlockGenerator)) as BlockGenerator;
         blockGenerator.SpawnObject();
         yield return null;
