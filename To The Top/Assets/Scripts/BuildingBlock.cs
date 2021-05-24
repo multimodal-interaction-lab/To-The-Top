@@ -4,18 +4,39 @@ using UnityEngine;
 
 public class BuildingBlock : MonoBehaviour
 {
-    // Start is called before the first frame update
+
+    
     void Start()
     {
-        
+        Spawn();
     }
 
-    // Update is called once per frame
-    void Update()
+   
+    void FixedUpdate()
     {
-        
+        Debug.Log(transform.localScale);
     }
 
+    // Block will grow
+    public void Spawn()
+    {
+        StartCoroutine(SpawnCoroutine());
+    }
+
+    IEnumerator SpawnCoroutine()
+    {
+        // Store the default scale as the final scale
+        Vector3 finalScale = transform.localScale;
+        transform.localScale = transform.localScale * 0.0001f;
+
+        // Increase the scale to the correct size
+        while (Mathf.Abs(finalScale.x - transform.localScale.x) > 0.0001f)
+        {
+            transform.localScale = Vector3.Lerp(transform.localScale, finalScale, .2f);
+            yield return new WaitForSeconds(.05f);
+        }
+        yield return null;
+    }
 
     // Block will shrink and then disappear
     public void Despawn()
