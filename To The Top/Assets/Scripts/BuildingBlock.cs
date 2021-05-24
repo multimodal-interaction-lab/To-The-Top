@@ -13,7 +13,7 @@ public class BuildingBlock : MonoBehaviour
    
     void FixedUpdate()
     {
-        Rigidbody rigbody = gameObject.GetComponent(typeof(Rigidbody)) as Rigidbody;
+     
     }
 
 
