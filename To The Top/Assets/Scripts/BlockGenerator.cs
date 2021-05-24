@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class BlockGenerator : MonoBehaviour
 {
-    // Start is called before the first frame update
+    List<GameObject> spawnedObjects;
+    public GameObject[] objectsToSpawn;
+
     void Start()
+    {
+        SpawnObject();
+    }
+
+    void Update()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SpawnObject()
     {
-        
+        spawnedObjects.Add(Instantiate(objectsToSpawn[0], transform.position, transform.rotation, transform));
     }
 }

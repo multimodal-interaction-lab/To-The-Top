@@ -14,9 +14,6 @@ public class BuildingBlock : MonoBehaviour
     void FixedUpdate()
     {
         Rigidbody rigbody = gameObject.GetComponent(typeof(Rigidbody)) as Rigidbody;
-
-        Debug.Log("Tag: " + gameObject.tag);
-        Debug.Log("Kinematic: " + rigbody.isKinematic);
     }
 
 
