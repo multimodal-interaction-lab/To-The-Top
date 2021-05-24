@@ -12,7 +12,7 @@ public class BlockGenerator : MonoBehaviour
         SpawnObject();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         
     }

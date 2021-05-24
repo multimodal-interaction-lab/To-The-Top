@@ -14,7 +14,17 @@ public class BuildingBlock : MonoBehaviour
    
     void FixedUpdate()
     {
-        Debug.Log(transform.localScale);
+        
+    }
+
+    public void BlockTaken()
+    {
+        // Call parent spawn point to generate another block as replacement
+        if(transform.parent != null)
+        {
+            BlockGenerator blockGenerator = gameObject.GetComponentInParent(typeof(BlockGenerator)) as BlockGenerator;
+            blockGenerator.SpawnObject();
+        }
     }
 
     // Block will grow
