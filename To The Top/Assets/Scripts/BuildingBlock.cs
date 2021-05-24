@@ -14,7 +14,7 @@ public class BuildingBlock : MonoBehaviour
    
     void FixedUpdate()
     {
-        Debug.Log(transform.localScale);
+        // Debug.Log(transform.localScale);
     }
 
     // Block will grow
