@@ -11,7 +11,6 @@ public class BlockGenerator : MonoBehaviour
 
     void Start()
     {
-        //SpawnObject();
     }
 
     void FixedUpdate()
@@ -34,5 +33,18 @@ public class BlockGenerator : MonoBehaviour
         {
             spawnedBlock.GetComponent<BuildingBlock>().Despawn();
         }
+    }
+
+    public void ReplaceBlock(GameObject blockToSpawn)
+    {
+        StartCoroutine(ReplaceBlockCoroutine(blockToSpawn));
+    }
+    IEnumerator ReplaceBlockCoroutine(GameObject blockToSpawn)
+    {
+        DespawnBlock();
+
+        yield return new WaitForSeconds(.08f);
+
+        SpawnBlock(blockToSpawn);
     }
 }

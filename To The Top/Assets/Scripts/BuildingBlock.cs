@@ -67,7 +67,7 @@ public class BuildingBlock : MonoBehaviour
         while (Mathf.Abs(finalScale.x - transform.localScale.x) > 0.0001f)
         {
             transform.localScale = Vector3.Lerp(transform.localScale, finalScale, .2f);
-            yield return new WaitForSeconds(.025f);
+            yield return new WaitForSeconds(.01f);
         }
     }
 

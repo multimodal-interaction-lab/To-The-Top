@@ -47,9 +47,9 @@ public class BlockSpawnMenu : MonoBehaviour
     public void SetBlockToSpawn(GameObject block)
     {
         blockToSpawn = block;
-
-        spawnPoint.GetComponent<BlockGenerator>().DespawnBlock();
-        spawnPoint.GetComponent<BlockGenerator>().SpawnBlock(blockToSpawn);
+        //spawnPoint.GetComponent<BlockGenerator>().DespawnBlock();
+        //spawnPoint.GetComponent<BlockGenerator>().SpawnBlock(blockToSpawn);
+        spawnPoint.GetComponent<BlockGenerator>().ReplaceBlock(blockToSpawn);
     }
 
     void ReplaceButton()
