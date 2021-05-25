@@ -60,9 +60,9 @@ public class BlockSpawnMenu : MonoBehaviour
         responsive = true;
     }
 
-    void ReplaceButton()
+    public void ReplaceButton()
     {
-        Destroy(pressedButton.transform.GetChild(0));
+        Destroy(pressedButton.transform.GetChild(0).gameObject);
         InstantiateButton(pressedButton);
     }
 

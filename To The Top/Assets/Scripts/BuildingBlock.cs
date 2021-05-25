@@ -9,7 +9,7 @@ public class BuildingBlock : MonoBehaviour
     public GameObject spawnPointObject;
 
     Rigidbody rigidbody;
-    bool unplaced = true;
+    bool fresh = true;
     bool despawning = false;
     float timeFromDespawn;
 
@@ -29,28 +29,29 @@ public class BuildingBlock : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+
+        Debug.Log("Menu: " + spawnMenuObject.name);
+        Debug.Log("spawn point: " + spawnPointObject.name);
     }
 
     public void BlockGrasped()
     {
+
+        // Tell Spawn point to stop referencing this block once it has been grabbed and tell menu to replace the button
+        if (fresh)
+        {
+            spawnPointObject.GetComponent<BlockGenerator>().spawnedBlock = null;
+            spawnMenuObject.GetComponent<BlockSpawnMenu>().ReplaceButton();
+        }
+        fresh = false;
         gameObject.tag = "BlockInHand";
         rigidbody.isKinematic = false;
     }
-    
+
     public void BlockReleased()
     {
-        // Call parent spawn point to generate another block as replacement
-        if (transform.parent != null)
-        {
-            if (unplaced)
-            {
-                // Only spawn replacement if taking from spawn point
-                // StartCoroutine(RequestReplacementCoroutine());
-            }
-        }
         gameObject.tag = "BlockInPlay";
-        rigidbody.isKinematic = false;
-        unplaced = false;
+        rigidbody.isKinematic = false;        
     }
 
     // Block will grow
@@ -81,7 +82,7 @@ public class BuildingBlock : MonoBehaviour
         gameObject.GetComponent<Collider>().enabled = false;
         StartCoroutine(DespawnCoroutine());
     }
-    
+
     public IEnumerator DespawnCoroutine()
     {
         yield return null;
