@@ -25,14 +25,7 @@ public class BuildingBlock : MonoBehaviour
         gameObject.tag = "BlockInHand";
         rigidbody.isKinematic = false;
     }
-    IEnumerator RequestReplacementCoroutine()
-    {
-        // Wait before calling the BlockGenerator spawn
-        yield return new WaitForSeconds(0.8f);
-        BlockGenerator blockGenerator = gameObject.GetComponentInParent(typeof(BlockGenerator)) as BlockGenerator;
-        blockGenerator.SpawnObject();
-        yield return null;
-    }
+    
     public void BlockReleased()
     {
         // Call parent spawn point to generate another block as replacement
@@ -41,12 +34,21 @@ public class BuildingBlock : MonoBehaviour
             if (unplaced)
             {
                 // Only spawn replacement if taking from spawn point
-                StartCoroutine(RequestReplacementCoroutine());
+                // StartCoroutine(RequestReplacementCoroutine());
             }
         }
         gameObject.tag = "BlockInPlay";
         rigidbody.isKinematic = false;
         unplaced = false;
+    }
+
+    IEnumerator RequestReplacementCoroutine()
+    {
+        // Wait before calling the BlockGenerator spawn
+        yield return new WaitForSeconds(0.8f);
+        BlockGenerator blockGenerator = gameObject.GetComponentInParent(typeof(BlockGenerator)) as BlockGenerator;
+        //blockGenerator.SpawnObject();
+        yield return null;
     }
 
     // Block will grow

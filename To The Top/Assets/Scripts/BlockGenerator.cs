@@ -9,7 +9,7 @@ public class BlockGenerator : MonoBehaviour
 
     void Start()
     {
-        SpawnObject();
+        //SpawnObject();
     }
 
     void FixedUpdate()
@@ -17,9 +17,9 @@ public class BlockGenerator : MonoBehaviour
         
     }
 
-    public void SpawnObject()
+    public void SpawnObject(GameObject objectToSpawn)
     {
-        int i = Random.Range(0, objectsToSpawn.Length);
-        spawnedObjects.Add(Instantiate(objectsToSpawn[i], transform.position, transform.rotation, transform));
+        //int i = Random.Range(0, objectsToSpawn.Length);
+        spawnedObjects.Add(Instantiate(objectToSpawn, transform.position, transform.rotation));
     }
 }
