@@ -58,7 +58,7 @@ public class BuildingBlock : MonoBehaviour
     {
         // Store the default scale as the final scale
         Vector3 finalScale = transform.localScale;
-        transform.localScale = transform.localScale * 0.0001f;
+        transform.localScale = transform.localScale * 0.001f;
 
         // Increase the scale to the correct size
         while (Mathf.Abs(finalScale.x - transform.localScale.x) > 0.0001f)
@@ -77,6 +77,7 @@ public class BuildingBlock : MonoBehaviour
     
     public IEnumerator DespawnCoroutine()
     {
+        yield return null;
         while (transform.localScale.x > .01f)
         {
             transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(0, 0, 0), .2f);
