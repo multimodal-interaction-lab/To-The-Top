@@ -17,7 +17,6 @@ public class SpawnButton : MonoBehaviour
     // Tell menu this button was pressed and which block to spawn
     public void Pressed()
     {
-        menuScript.SetPressedButton(transform.parent.gameObject);
-        menuScript.SetBlockToSpawn(blockToSpawn);
+        menuScript.ButtonPressed(transform.parent.gameObject, blockToSpawn);
     }
 }

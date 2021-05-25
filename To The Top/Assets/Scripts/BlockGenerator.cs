@@ -32,6 +32,7 @@ public class BlockGenerator : MonoBehaviour
         if (spawnedBlock != null)
         {
             spawnedBlock.GetComponent<BuildingBlock>().Despawn();
+            spawnedBlock = null;
         }
     }
 
@@ -42,8 +43,8 @@ public class BlockGenerator : MonoBehaviour
     IEnumerator ReplaceBlockCoroutine(GameObject blockToSpawn)
     {
         DespawnBlock();
-
-        yield return new WaitForSeconds(.08f);
+       
+        yield return new WaitForSeconds(0.5f);
 
         SpawnBlock(blockToSpawn);
     }

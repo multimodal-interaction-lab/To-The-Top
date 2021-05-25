@@ -6,9 +6,11 @@ public class BuildingBlock : MonoBehaviour
 {
 
     public GameObject spawnMenuObject;
+    public GameObject spawnPointObject;
 
     Rigidbody rigidbody;
     bool unplaced = true;
+
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
@@ -57,7 +59,7 @@ public class BuildingBlock : MonoBehaviour
         StartCoroutine(SpawnCoroutine());
     }
 
-    IEnumerator SpawnCoroutine()
+    public IEnumerator SpawnCoroutine()
     {
         // Store the default scale as the final scale
         Vector3 finalScale = transform.localScale;
@@ -74,10 +76,12 @@ public class BuildingBlock : MonoBehaviour
     // Block will shrink and then disappear
     public void Despawn()
     {
+        Debug.Log(gameObject.GetComponent<Collider>());
+        gameObject.GetComponent<Collider>().enabled = false;
         StartCoroutine(DespawnCoroutine());
     }
-
-    IEnumerator DespawnCoroutine()
+    
+    public IEnumerator DespawnCoroutine()
     {
         while (transform.localScale.x > .01f)
         {

@@ -12,7 +12,7 @@ public class BlockSpawnMenu : MonoBehaviour
     GameObject bottomButton;
     GameObject pressedButton;
     GameObject blockToSpawn;
-    
+
 
     void Start()
     {
@@ -37,19 +37,14 @@ public class BlockSpawnMenu : MonoBehaviour
         }
     }
 
-    // called by SpawnButton
-    public void SetPressedButton(GameObject button)
-    {
-        pressedButton = button;
-    }
 
-    // called by SpawnButton
-    public void SetBlockToSpawn(GameObject block)
+    // called by SpawnButton when pressed
+    public void ButtonPressed(GameObject button, GameObject block)
     {
-        blockToSpawn = block;
-        //spawnPoint.GetComponent<BlockGenerator>().DespawnBlock();
-        //spawnPoint.GetComponent<BlockGenerator>().SpawnBlock(blockToSpawn);
-        spawnPoint.GetComponent<BlockGenerator>().ReplaceBlock(blockToSpawn);
+            pressedButton = button;
+            blockToSpawn = block;
+            spawnPoint.GetComponent<BlockGenerator>().ReplaceBlock(blockToSpawn);
+        
     }
 
     void ReplaceButton()
@@ -62,4 +57,5 @@ public class BlockSpawnMenu : MonoBehaviour
     {
         
     }
+    
 }
