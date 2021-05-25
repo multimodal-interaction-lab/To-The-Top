@@ -4,19 +4,7 @@ using UnityEngine;
 
 public class BlockGenerator : MonoBehaviour
 {
-    List<GameObject> spawnedObjects;
-    public GameObject[] objectsToSpawn;
-
     GameObject spawnedBlock;
-
-    void Start()
-    {
-    }
-
-    void FixedUpdate()
-    {
-        
-    }
 
     // Spawn the given block and store a reference to it
     public void SpawnBlock(GameObject blockToSpawn)

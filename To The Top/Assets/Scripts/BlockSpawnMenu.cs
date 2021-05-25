@@ -13,9 +13,12 @@ public class BlockSpawnMenu : MonoBehaviour
     GameObject pressedButton;
     GameObject blockToSpawn;
 
+    bool responsive;
 
     void Start()
     {
+        responsive = true;
+
         topButton = transform.Find("Top Button").gameObject;
         middleButton = transform.Find("Middle Button").gameObject;
         bottomButton = transform.Find("Bottom Button").gameObject;
@@ -30,7 +33,7 @@ public class BlockSpawnMenu : MonoBehaviour
         GameObject spawnedButton;
         int i = Random.Range(0, spawnButtons.Length);
         spawnedButton = Instantiate(spawnButtons[i], spawnPoint.transform.position, spawnPoint.transform.rotation, spawnPoint.transform);
-        
+
         if (spawnButtons[i].name.Equals("ArchSpawnButton"))
         {
             spawnedButton.transform.localPosition += new Vector3(-0.048f, 0f, 0f);
@@ -41,10 +44,20 @@ public class BlockSpawnMenu : MonoBehaviour
     // called by SpawnButton when pressed
     public void ButtonPressed(GameObject button, GameObject block)
     {
+        if (responsive)
+        {
+            responsive = false;
             pressedButton = button;
             blockToSpawn = block;
             spawnPoint.GetComponent<BlockGenerator>().ReplaceBlock(blockToSpawn);
-        
+            StartCoroutine(WaitCoroutine());
+        }
+    }
+
+    IEnumerator WaitCoroutine()
+    {
+        yield return new WaitForSeconds(0.8f);
+        responsive = true;
     }
 
     void ReplaceButton()
@@ -55,7 +68,7 @@ public class BlockSpawnMenu : MonoBehaviour
 
     void FixedUpdate()
     {
-        
+
     }
-    
+
 }

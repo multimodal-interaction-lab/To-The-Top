@@ -17,11 +17,6 @@ public class BuildingBlock : MonoBehaviour
         Spawn();
     }
 
-
-    void FixedUpdate()
-    {
-    }
-
     public void BlockGrasped()
     {
         gameObject.tag = "BlockInHand";
