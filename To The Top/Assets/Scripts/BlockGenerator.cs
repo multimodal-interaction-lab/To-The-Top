@@ -7,6 +7,8 @@ public class BlockGenerator : MonoBehaviour
     List<GameObject> spawnedObjects;
     public GameObject[] objectsToSpawn;
 
+    GameObject spawnedBlock;
+
     void Start()
     {
         //SpawnObject();
@@ -17,9 +19,16 @@ public class BlockGenerator : MonoBehaviour
         
     }
 
-    public void SpawnObject(GameObject objectToSpawn)
+    // Spawn the given block and store a reference to it
+    public void SpawnBlock(GameObject blockToSpawn)
+    {
+        spawnedBlock = Instantiate(blockToSpawn, transform.position, transform.rotation);
+    }
+
+    // Tell the referenced block to despawn
+    public void DespawnBlock()
     {
         //int i = Random.Range(0, objectsToSpawn.Length);
-        spawnedObjects.Add(Instantiate(objectToSpawn, transform.position, transform.rotation));
+        spawnedBlock.GetComponent<BuildingBlock>().Despawn();
     }
 }

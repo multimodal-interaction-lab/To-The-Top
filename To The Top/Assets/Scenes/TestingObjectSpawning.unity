@@ -121,18 +121,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &94310752 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3509245967931240619, guid: 67c0aeaee83e1c64eb70e4b07f7f8f74,
-    type: 3}
-  m_PrefabInstance: {fileID: 3509245967630913926}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a84c5221b77780b459ac981c2583e1e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &194283627
 GameObject:
   m_ObjectHideFlags: 0
@@ -450,7 +438,7 @@ GameObject:
   m_Component:
   - component: {fileID: 279566048}
   m_Layer: 0
-  m_Name: Bottom Spawn Button
+  m_Name: Bottom Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -696,6 +684,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98c5094c9dd6229478dc1f77bf46444f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnButtons:
+  - {fileID: 5205491125541531261, guid: 68864e73190b1f848a9a4fb7bdc5d8c8, type: 3}
+  - {fileID: 3967709727169652938, guid: 083740d05d83be042a3888f2b06f4e9e, type: 3}
+  spawnPoint: {fileID: 1317126487}
 --- !u!4 &423827058 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4542260197562760, guid: 2aa010a1e75292e49a24f3f71bb9cddb,
@@ -3581,7 +3573,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1198861436}
   m_Layer: 0
-  m_Name: Middle Spawn Button
+  m_Name: Middle Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3607,6 +3599,12 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3175417937309592741, guid: 1f2c27a4e3501c04ea6b75f44bf84118,
     type: 3}
   m_PrefabInstance: {fileID: 1853191969}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1317126487 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3509245967931240618, guid: 67c0aeaee83e1c64eb70e4b07f7f8f74,
+    type: 3}
+  m_PrefabInstance: {fileID: 3509245967630913926}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1319764284
 GameObject:
@@ -3935,7 +3933,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1578623610}
   m_Layer: 0
-  m_Name: Top Spawn Button
+  m_Name: Top Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4027,6 +4025,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ArchSpawnButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 3967709727169652938, guid: 083740d05d83be042a3888f2b06f4e9e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3967709727169652939, guid: 083740d05d83be042a3888f2b06f4e9e,
         type: 3}
@@ -4440,6 +4443,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ArchSpawnButton
       objectReference: {fileID: 0}
+    - target: {fileID: 3967709727169652938, guid: 083740d05d83be042a3888f2b06f4e9e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3967709727169652939, guid: 083740d05d83be042a3888f2b06f4e9e,
         type: 3}
       propertyPath: m_RootOrder
@@ -4644,6 +4652,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CubeSpawnButton
       objectReference: {fileID: 0}
+    - target: {fileID: 5205491125541531261, guid: 68864e73190b1f848a9a4fb7bdc5d8c8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5205491125541531262, guid: 68864e73190b1f848a9a4fb7bdc5d8c8,
         type: 3}
       propertyPath: _OnPress.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -4653,11 +4666,11 @@ PrefabInstance:
         type: 3}
       propertyPath: _OnPress.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 94310752}
+      objectReference: {fileID: 400536481}
     - target: {fileID: 5205491125541531262, guid: 68864e73190b1f848a9a4fb7bdc5d8c8,
         type: 3}
       propertyPath: _OnPress.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SpawnObject
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5205491125541531262, guid: 68864e73190b1f848a9a4fb7bdc5d8c8,
         type: 3}

@@ -5,6 +5,8 @@ using UnityEngine;
 public class BuildingBlock : MonoBehaviour
 {
 
+    public GameObject spawnMenuObject;
+
     Rigidbody rigidbody;
     bool unplaced = true;
     void Start()
