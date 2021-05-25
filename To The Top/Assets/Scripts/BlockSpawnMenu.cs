@@ -66,9 +66,4 @@ public class BlockSpawnMenu : MonoBehaviour
         InstantiateButton(pressedButton);
     }
 
-    void FixedUpdate()
-    {
-
-    }
-
 }

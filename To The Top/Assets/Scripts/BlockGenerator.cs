@@ -26,12 +26,11 @@ public class BlockGenerator : MonoBehaviour
     {
         StartCoroutine(ReplaceBlockCoroutine(blockToSpawn));
     }
+
     IEnumerator ReplaceBlockCoroutine(GameObject blockToSpawn)
     {
         DespawnBlock();
-       
         yield return new WaitForSeconds(0.5f);
-
         SpawnBlock(blockToSpawn);
     }
 }
