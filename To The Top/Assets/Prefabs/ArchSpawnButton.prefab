@@ -134,7 +134,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11c0332db82e8cd4d9d8dba97d6661c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockToSpawn: {fileID: 0}
+  blockToSpawn: {fileID: 1325095286254662561, guid: 118ec86c43e19c240b057b8ff11e95b3,
+    type: 3}
 --- !u!1 &3967709728138481878
 GameObject:
   m_ObjectHideFlags: 0

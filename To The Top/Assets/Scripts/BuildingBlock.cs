@@ -67,9 +67,8 @@ public class BuildingBlock : MonoBehaviour
         while (Mathf.Abs(finalScale.x - transform.localScale.x) > 0.0001f)
         {
             transform.localScale = Vector3.Lerp(transform.localScale, finalScale, .2f);
-            yield return new WaitForSeconds(.05f);
+            yield return new WaitForSeconds(.025f);
         }
-        yield return null;
     }
 
     // Block will shrink and then disappear
@@ -83,9 +82,8 @@ public class BuildingBlock : MonoBehaviour
         while (transform.localScale.x > .01f)
         {
             transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(0, 0, 0), .2f);
-            yield return new WaitForSeconds(.05f);
+            yield return new WaitForSeconds(.025f);
         }
         Destroy(gameObject);
-        yield return null;
     }
 }

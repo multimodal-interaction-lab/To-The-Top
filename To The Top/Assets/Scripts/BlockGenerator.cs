@@ -22,13 +22,17 @@ public class BlockGenerator : MonoBehaviour
     // Spawn the given block and store a reference to it
     public void SpawnBlock(GameObject blockToSpawn)
     {
+        Debug.Log("SpawnBlock called");
         spawnedBlock = Instantiate(blockToSpawn, transform.position, transform.rotation);
     }
 
     // Tell the referenced block to despawn
     public void DespawnBlock()
     {
-        //int i = Random.Range(0, objectsToSpawn.Length);
-        spawnedBlock.GetComponent<BuildingBlock>().Despawn();
+        Debug.Log("DespawnBlock called");
+        if (spawnedBlock != null)
+        {
+            spawnedBlock.GetComponent<BuildingBlock>().Despawn();
+        }
     }
 }
