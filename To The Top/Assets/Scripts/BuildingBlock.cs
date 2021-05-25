@@ -71,7 +71,6 @@ public class BuildingBlock : MonoBehaviour
     // Block will shrink and then disappear
     public void Despawn()
     {
-        Debug.Log(gameObject.GetComponent<Collider>());
         gameObject.GetComponent<Collider>().enabled = false;
         StartCoroutine(DespawnCoroutine());
     }
@@ -81,7 +80,7 @@ public class BuildingBlock : MonoBehaviour
         while (transform.localScale.x > .01f)
         {
             transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(0, 0, 0), .2f);
-            yield return new WaitForSeconds(.025f);
+            yield return new WaitForSeconds(.01f);
         }
         Destroy(gameObject);
     }
