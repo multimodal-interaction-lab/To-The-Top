@@ -10,11 +10,25 @@ public class BuildingBlock : MonoBehaviour
 
     Rigidbody rigidbody;
     bool unplaced = true;
+    bool despawning = false;
+    float timeFromDespawn;
 
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
         Spawn();
+    }
+
+    private void FixedUpdate()
+    {
+        // Fail safe destruction if the despawn coroutine doesn't work
+        if (despawning)
+        {
+            if (Time.time - timeFromDespawn > 0.3f)
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 
     public void BlockGrasped()
@@ -37,15 +51,6 @@ public class BuildingBlock : MonoBehaviour
         gameObject.tag = "BlockInPlay";
         rigidbody.isKinematic = false;
         unplaced = false;
-    }
-
-    IEnumerator RequestReplacementCoroutine()
-    {
-        // Wait before calling the BlockGenerator spawn
-        yield return new WaitForSeconds(0.8f);
-        BlockGenerator blockGenerator = gameObject.GetComponentInParent(typeof(BlockGenerator)) as BlockGenerator;
-        //blockGenerator.SpawnObject();
-        yield return null;
     }
 
     // Block will grow
@@ -71,6 +76,8 @@ public class BuildingBlock : MonoBehaviour
     // Block will shrink and then disappear
     public void Despawn()
     {
+        despawning = true;
+        timeFromDespawn = Time.time;
         gameObject.GetComponent<Collider>().enabled = false;
         StartCoroutine(DespawnCoroutine());
     }
