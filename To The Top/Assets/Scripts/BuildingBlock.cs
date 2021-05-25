@@ -20,8 +20,6 @@ public class BuildingBlock : MonoBehaviour
 
     public void BlockGrasped()
     {
-        
-
         gameObject.tag = "BlockInHand";
         rigidbody.isKinematic = false;
     }
