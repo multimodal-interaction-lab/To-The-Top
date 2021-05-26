@@ -48,7 +48,15 @@ public class PlayerMovement : MonoBehaviour
         if (moveUpFlag)
         {
             Vector3 moveVector = new Vector3(0f, moveSpeed * Time.deltaTime, 0f);
-            transform.position += moveVector;
+
+            float currentY = transform.position.y;
+            currentY += moveVector.y;
+
+            if (currentY <= 5)
+            {
+                transform.position += moveVector;
+            }
+
         }
 
         if (moveDownFlag)
