@@ -4,21 +4,36 @@ using UnityEngine;
 
 public class BlockGenerator : MonoBehaviour
 {
-    List<GameObject> spawnedObjects;
-    public GameObject[] objectsToSpawn;
+    public GameObject spawnMenuObject;
+    public GameObject spawnedBlock;
 
-    void Start()
+    // Spawn the given block and store a reference to it
+    public void SpawnBlock(GameObject blockToSpawn)
     {
-        SpawnObject();
+        spawnedBlock = Instantiate(blockToSpawn, transform.position, transform.rotation);
+        spawnedBlock.GetComponent<BuildingBlock>().spawnMenuObject = spawnMenuObject;
+        spawnedBlock.GetComponent<BuildingBlock>().spawnPointObject = gameObject;
     }
 
-    void Update()
+    // Tell the referenced block to despawn
+    public void DespawnBlock()
     {
-        
+        if (spawnedBlock != null)
+        {
+            spawnedBlock.GetComponent<BuildingBlock>().Despawn();
+            spawnedBlock = null;
+        }
     }
 
-    public void SpawnObject()
+    public void ReplaceBlock(GameObject blockToSpawn)
     {
-        spawnedObjects.Add(Instantiate(objectsToSpawn[0], transform.position, transform.rotation, transform));
+        StartCoroutine(ReplaceBlockCoroutine(blockToSpawn));
+    }
+
+    IEnumerator ReplaceBlockCoroutine(GameObject blockToSpawn)
+    {
+        DespawnBlock();
+        yield return new WaitForSeconds(0.5f);
+        SpawnBlock(blockToSpawn);
     }
 }
