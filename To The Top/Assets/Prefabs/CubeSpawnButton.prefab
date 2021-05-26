@@ -321,5 +321,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11c0332db82e8cd4d9d8dba97d6661c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockToSpawn: {fileID: 4666272775720269085, guid: 8d5d266278090604eb4431606aa66bc1,
+  blockToSpawn: {fileID: 4666272775720269085, guid: 3317abff4b5789c4aad812e869fe6de4,
     type: 3}
