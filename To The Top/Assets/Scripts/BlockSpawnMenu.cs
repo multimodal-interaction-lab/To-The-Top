@@ -62,7 +62,11 @@ public class BlockSpawnMenu : MonoBehaviour
 
     public void ReplaceButton()
     {
-        Destroy(pressedButton.transform.GetChild(0).gameObject);
+        // Destroy all buttons
+        for (int i = 0; i < pressedButton.transform.childCount; i++) {
+            Destroy(pressedButton.transform.GetChild(i).gameObject);
+        }
+        // Place new putton
         InstantiateButton(pressedButton);
     }
 
