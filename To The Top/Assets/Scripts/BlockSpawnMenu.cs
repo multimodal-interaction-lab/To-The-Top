@@ -38,6 +38,10 @@ public class BlockSpawnMenu : MonoBehaviour
         {
             spawnedButton.transform.localPosition += new Vector3(-0.048f, 0f, 0f);
         }
+        else if (spawnButtons[i].name.Equals("BoxSpawnButton"))
+        {
+            spawnedButton.transform.localPosition += new Vector3(-0.0367f, 0f, 0f);
+        }
     }
 
 
