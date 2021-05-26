@@ -1,2 +1,2 @@
-# to-the-top
-Multimodal Interaction Lab Summer 2021 Intern Project
+# To The Top!
+A virtual reality building block game. Multimodal Interaction Lab Summer 2021 Intern Project
