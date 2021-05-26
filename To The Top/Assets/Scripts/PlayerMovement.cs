@@ -20,6 +20,8 @@ public class PlayerMovement : MonoBehaviour
     bool moveUpFlag;
     bool moveDownFlag;
 
+    Vector3 startingPosition;
+
 
     void Start()
     {
@@ -27,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
         rotateRightFlag = false;
         moveUpFlag = false;
         moveDownFlag = false;
+        startingPosition = transform.position;
     }
 
     void FixedUpdate()
@@ -51,7 +54,13 @@ public class PlayerMovement : MonoBehaviour
         if (moveDownFlag)
         {
             Vector3 moveVector = new Vector3(0f, moveSpeed * Time.deltaTime * -1f, 0f);
-            transform.position += moveVector;
+            float currentY = transform.position.y;
+            currentY += moveVector.y;
+
+            if (currentY >= startingPosition.y)
+            {
+                transform.position += moveVector;
+            }
         }
 
     }
