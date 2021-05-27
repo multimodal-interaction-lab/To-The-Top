@@ -122,6 +122,7 @@ GameObject:
   - component: {fileID: 823318522686821225}
   - component: {fileID: 5359775248811922535}
   - component: {fileID: 892106128328001054}
+  - component: {fileID: 304231035985166439}
   m_Layer: 0
   m_Name: archBlock
   m_TagString: BlockInSpawn
@@ -234,6 +235,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85513e2131ea233488c4c61bb1308e8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnMenuObject: {fileID: 0}
+  spawnPointObject: {fileID: 0}
 --- !u!64 &892106128328001054
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -248,6 +251,22 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 9099364022323413523, guid: a19a605692abc494f87be277be35ea97, type: 3}
+--- !u!114 &304231035985166439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325095286254662561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 1
+  m_UseLocal: 0
 --- !u!1 &1691378094873521059
 GameObject:
   m_ObjectHideFlags: 0
