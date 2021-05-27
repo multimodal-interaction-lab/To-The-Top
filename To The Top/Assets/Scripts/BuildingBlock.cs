@@ -37,9 +37,6 @@ public class BuildingBlock : MonoBehaviourPun
                 }
             }
         }
-
-        Debug.Log("Menu: " + spawnMenuObject.name);
-        Debug.Log("spawn point: " + spawnPointObject.name);
     }
 
     public void BlockGrasped()

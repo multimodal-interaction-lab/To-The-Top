@@ -10,8 +10,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [Tooltip("Table for player to revolve around")]
-    public GameObject table;
+    [Tooltip("Point for player to revolve around which should be center of table")]
+    public GameObject pointToCircle;
     public float rotationSpeed = 25f;
     public float moveSpeed = 0.75f;
 
@@ -37,12 +37,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (rotateLeftFlag)
         {
-            transform.RotateAround(table.transform.position, Vector3.up, rotationSpeed * Time.deltaTime);
+            transform.RotateAround(pointToCircle.transform.position, Vector3.up, rotationSpeed * Time.deltaTime);
         }
 
         if (rotateRightFlag)
         {
-            transform.RotateAround(table.transform.position, Vector3.up, rotationSpeed * Time.deltaTime * -1f);
+            transform.RotateAround(pointToCircle.transform.position, Vector3.up, rotationSpeed * Time.deltaTime * -1f);
         }
 
         if (moveUpFlag)

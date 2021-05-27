@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 4666272775720269083}
   - component: {fileID: 4666272775720269082}
   - component: {fileID: 5335841856967687418}
+  - component: {fileID: 851942577803828589}
   m_Layer: 0
   m_Name: CubeBlock
   m_TagString: BlockInSpawn
@@ -203,3 +204,26 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 1
   m_UseLocal: 0
+--- !u!114 &851942577803828589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4666272775720269085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 5335841856967687418}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
