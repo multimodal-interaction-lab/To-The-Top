@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class BuildingBlock : MonoBehaviour
+public class BuildingBlock : MonoBehaviourPun
 {
 
     public GameObject spawnMenuObject;
@@ -26,12 +27,16 @@ public class BuildingBlock : MonoBehaviour
         {
             if (Time.time - timeFromDespawn > 0.3f)
             {
-                Destroy(gameObject);
+                if (PhotonNetwork.IsConnected == true)
+                {
+                    PhotonNetwork.Destroy(gameObject);
+                }
+                else
+                {
+                    Destroy(gameObject);
+                }
             }
         }
-
-        Debug.Log("Menu: " + spawnMenuObject.name);
-        Debug.Log("spawn point: " + spawnPointObject.name);
     }
 
     public void BlockGrasped()
@@ -51,7 +56,7 @@ public class BuildingBlock : MonoBehaviour
     public void BlockReleased()
     {
         gameObject.tag = "BlockInPlay";
-        rigidbody.isKinematic = false;        
+        rigidbody.isKinematic = false;
     }
 
     // Block will grow
@@ -91,6 +96,14 @@ public class BuildingBlock : MonoBehaviour
             transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(0, 0, 0), .2f);
             yield return new WaitForSeconds(.01f);
         }
-        Destroy(gameObject);
+
+        if (PhotonNetwork.IsConnected == true)
+        {
+            PhotonNetwork.Destroy(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }

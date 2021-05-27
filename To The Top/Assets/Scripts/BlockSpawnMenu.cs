@@ -7,8 +7,11 @@ public class BlockSpawnMenu : MonoBehaviour
     public GameObject[] spawnButtons;
     public GameObject spawnPoint;
 
+    [SerializeField]
     GameObject topButton;
+    [SerializeField]
     GameObject middleButton;
+    [SerializeField]
     GameObject bottomButton;
     GameObject pressedButton;
     GameObject blockToSpawn;
@@ -19,9 +22,9 @@ public class BlockSpawnMenu : MonoBehaviour
     {
         responsive = true;
 
-        topButton = transform.Find("Top Button").gameObject;
-        middleButton = transform.Find("Middle Button").gameObject;
-        bottomButton = transform.Find("Bottom Button").gameObject;
+        //topButton = transform.Find("Top Button").gameObject;
+        //middleButton = transform.Find("Middle Button").gameObject;
+        //bottomButton = transform.Find("Bottom Button").gameObject;
 
         InstantiateButton(topButton);
         InstantiateButton(middleButton);
