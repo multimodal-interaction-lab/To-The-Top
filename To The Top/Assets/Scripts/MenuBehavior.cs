@@ -4,69 +4,175 @@ using UnityEngine;
 
 public class MenuBehavior : MonoBehaviour
 {
-    //Variables
-    //Main menu -- Create, Join, Credits, Quit
-    public bool TitleVisible = true;
-    public bool SubtitleVisible = true;
-    public bool MainMenuVisible = true;
-    public bool CreateGameVisible = false;
-    public bool JoinGameVisible = false;
-    public bool CreditsVisible = false;
-    public bool SettingsVisible = true;
-    public bool QuitVisible = true;
+    // Shared
+        public GameObject BackToMM;     // Button to return to menu
+        //public bool BackToMMVisible = false;
 
-    public GameObject TitleText;
-    public GameObject SubtitleText;
-    public GameObject CreateGameUI;
-    public GameObject JoinGameUI;
-    public GameObject CreditsUI;
-    public GameObject SettingsUI;
-    public GameObject QuitUI;
+        public GameObject BackToMP;     // Button to return to multiplayer menu
+        //public bool BackToMPVisible = false;
 
-    //Create Game menu -- SetTime, SetPlayer, GenRoomCode, Start, Back
-    public bool GenRoomCodeVisible = false;
-    public bool SetTimeVisible = false;
-    public bool SetPlayerVisible = false;
-    public bool StartVisible = false;
-    public bool BackVisible = false;
+    //~~ Main menu (MM) ~~
+        public GameObject TitleText;
+        public GameObject SubtitleText;
+        public GameObject SingleplayerMM;
+        public GameObject MultiplayerMM;
+        public GameObject SettingsMM;
+        public GameObject CreditsMM;
+        public GameObject QuitMM;
 
-    public GameObject GeneratedRoomCode;
-    public GameObject StartUI;
+        //NOTE: IDK if we need the visible variables. They don't actually do anything anymore.
+        // I think we should just cut the 'visible' variables and go entirely off methods
+        /*
+        public bool TitleTextVisible = true;
+        public bool SubtitleTextVisible = true;
+        public bool SingleplayerMMVisible = true;
+        public bool MultiplayerMMVisible = true;
+        public bool SettingsMMVisible = true;
+        public bool CreditsMMVisible = true;
+        public bool QuitMMVisible = true;
+        */
 
-    //Join Game menu -- RoomCode, Join, Back
-    public bool JoinRoomCodeVisible = false;
-    public bool JoinVisible = false;
+    //~~ Settings (ST) ~~
+        public GameObject SoundST;
+        // BackToMM Object
 
-    public GameObject JoinUI;
+        //public bool SoundSTVisible = false;
+        // BackToMM Visible
 
-    //Credits menu -- Credits, Copyright, Back
-    public bool CreditsTextVisible = false;
-    public bool CopyrightTextVisible = false;
+    //~~ Multiplayer (MP) ~~
+        public GameObject CreateRoomMP;
+        public GameObject JoinRoomMP;
+        // BackToMM Object
 
-    public GameObject CreditsText;
-    public GameObject CopyrightText;
-    
+        //public bool CreateRoomMPVisible = false;
+        //public bool JoinRoomMPVisible = false;
+        // BackToMM Visible
+
+    //~~ Create Room (CR) ~~
+        public GameObject PlayerCountCR;    // Readout for editing player count
+        public GameObject TimeSettingCR;    // Readout for editing timer
+        public GameObject NextPlayerCR;     // Button for selecting next player count
+        public GameObject PrevPlayerCR;     // Button for selecting previous player count
+        public GameObject NextTimeCR;     // Button for selecting next player count
+        public GameObject PrevTimeCR;     // Button for selecting previous player count
+        public GameObject CreateGameCR;     // Button for creating a room with the selected settings
+                                            // BackToMP Object
+        /*
+        public bool PlayerCountCRVisible = false;
+        public bool TimeSettingCRVisible = false;
+        public bool NextPlayerCRVisible = false;
+        public bool PrevPlayerCRVisible = false;
+        public bool NextTimeCRVisible = false;
+        public bool PrevTimeCRVisible = false;
+        public bool CreateGameCRVisible = false;
+        */
+        // BackToMP Visible
+
+    //~~ Join Room (JR) ~~
+        public GameObject RoomButton1JR;    // Button for selecting the 1st room on the list
+        public GameObject RoomButton2JR;    // Button for selecting the 2nd room on the list
+        public GameObject RoomButton3JR;    // Button for selecting the 3rd room on the list
+        public GameObject RoomButton4JR;    // Button for selecting the 4th room on the list
+        public GameObject NextPageJR;       // Button for selecting the next page of rooms
+        public GameObject PrevPageJR;       // Button for selecting the previous page of rooms
+        public GameObject JoinRoomJR;       // Button for joining the selected room
+        public GameObject JoinRandRoomJR;   // Button for joining a random room; testing/debug ??
+        // BackToMP Object
+        /*
+        public bool RoomButton1JRVisible = false;
+        public bool RoomButton2JRVisible = false;
+        public bool RoomButton3JRVisible = false;
+        public bool RoomButton4JRVisible = false;
+        public bool NextPageJRVisible = false;
+        public bool PrevPageJRVisible = false;
+        public bool JoinRoomJRVisible = false;
+        public bool JoinRandRoomJRVisible = false;
+    */
+        // BackToMP Visible
+
+    //~~ Credits (CD)~~
+        public GameObject CreditsTextCD;
+        public GameObject CopyrightTextCD;
+        // BackToMM Object
+
+        //public bool CreditsTextCDVisible = false;
+        //public bool CopyrightTextCDVisible = false;
+        // BackToMM Visible
+
+    //~~ Quit Game (QG)
+        public GameObject QuitYesQG;    // Button to confirm quitting game
+        public GameObject QuitNoQG;     // Button to cancel quitting game, returns to MM
+
+        //public bool QuitYesQGVisible = false;
+        //public bool QuitNoQGVisible = false;
+
 
     // Start is called before the first frame update
     void Start()
-    {
-        //Main menu 
-        TitleText.SetActive(TitleVisible);
-        SubtitleText.SetActive(SubtitleVisible);
-        CreateGameUI.SetActive(CreateGameVisible);
-        JoinGameUI.SetActive(JoinGameVisible);
-        CreditsUI.SetActive(CreditsVisible);
-        SettingsUI.SetActive(SettingsVisible);
-        QuitUI.SetActive(QuitVisible);
-        
-        // For MainMenuVisible, we'll should do SetActive to the children, just in case we need to spawn in the scene with it hidden
-        
+    {   
+        menuMM();
+        Debug.Log("Starting menu behavior script");
     }
 
-    // Update is called once per frame
-    void Update()
+    // Sets the visibility of each element to false, effectively clearing the menu
+    void menuHideAllElements()
     {
-       
+        //.SetActive(false);
+
+        BackToMM.SetActive(false);
+        BackToMP.SetActive(false);
+
+        TitleText.SetActive(false);
+        SubtitleText.SetActive(false);
+        SingleplayerMM.SetActive(false);
+        MultiplayerMM.SetActive(false);
+        SettingsMM.SetActive(false);
+        CreditsMM.SetActive(false);
+        QuitMM.SetActive(false);
+
+        SoundST.SetActive(false);
+
+        CreateRoomMP.SetActive(false); 
+        JoinRoomMP.SetActive(false);
+
+          PlayerCountCR.SetActive(false);   
+          TimeSettingCR.SetActive(false); 
+          NextPlayerCR.SetActive(false);    
+          PrevPlayerCR.SetActive(false); 
+          CreateGameCR.SetActive(false);  
+
+          RoomButton1JR.SetActive(false); 
+          RoomButton2JR.SetActive(false); 
+          RoomButton3JR.SetActive(false);  
+          RoomButton4JR.SetActive(false);  
+          NextPageJR.SetActive(false);    
+          PrevPageJR.SetActive(false);  
+          JoinRoomJR.SetActive(false);
+          JoinRandRoomJR.SetActive(false);
+
+          CreditsTextCD.SetActive(false);
+          CopyrightTextCD.SetActive(false);
+
+          QuitYesQG.SetActive(false);  
+          QuitNoQG.SetActive(false);
+
+        Debug.Log("Hiding All Elements");
+
+}
+
+    void menuMM()
+    {
+        menuHideAllElements();
+
+        TitleText.SetActive(true);
+        SubtitleText.SetActive(true);
+        SingleplayerMM.SetActive(true);
+        MultiplayerMM.SetActive(true);
+        SettingsMM.SetActive(true);
+        CreditsMM.SetActive(true);
+        QuitMM.SetActive(true);
+
+        Debug.Log("Showing Main Menu");
     }
 
     // Exits the game
@@ -84,10 +190,12 @@ public class MenuBehavior : MonoBehaviour
     // Makes Join Game menu visible and disables the other menus
 
     // Makes Credits Menu visible and disables the other menus
-    void selectCredits()
+    void menuCD()
     {
+        /*
         CreditsText.SetActive(CreditsTextVisible);
         CopyrightText.SetActive(CopyrightTextVisible);
+        */
     }
 
 }
