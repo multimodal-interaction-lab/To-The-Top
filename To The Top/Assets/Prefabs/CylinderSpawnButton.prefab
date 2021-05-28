@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1116985236232468737}
   - component: {fileID: 1116985236232468736}
   - component: {fileID: 6938102110321160617}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: CylinderSpawnButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 1116985237536801058}
   - component: {fileID: 1116985237536801052}
   - component: {fileID: 2214491684744610566}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -242,7 +242,7 @@ GameObject:
   - component: {fileID: 1116985237895766828}
   - component: {fileID: 1116985237895766830}
   - component: {fileID: 4833749597790923358}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Button Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
