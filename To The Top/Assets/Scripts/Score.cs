@@ -13,6 +13,9 @@ public class Score : MonoBehaviourPun, IPunObservable
 
     public Text playerNameText;
     public Text heightText;
+    public Text scoreText;
+    public Text penaltyText;
+
     int localPlayerNumber;
     public GameObject heightScanner;
 
@@ -52,5 +55,13 @@ public class Score : MonoBehaviourPun, IPunObservable
         heights[localPlayerNumber - 1] = heightScanner.GetComponent<HeightTriggerBehavior>().readTowerHeight();
         heightText.text = "Height: " + heights[localPlayerNumber - 1].ToString();
     }
+
+    // Called when block player spawned falls out of bounds
+    public void AddPenalty()
+    {
+        penalties[localPlayerNumber - 1] += 1;
+        penaltyText.text = "Penalties: " + penalties[localPlayerNumber - 1].ToString();
+    }
+
 
 }
