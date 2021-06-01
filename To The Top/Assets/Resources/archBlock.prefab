@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4247137517881638681}
   - component: {fileID: 3197059991492413918}
   - component: {fileID: 3361774917986986699}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: arch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8228105609003218847}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: transform2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 892106128328001054}
   - component: {fileID: 304231035985166439}
   - component: {fileID: 5248429087646552246}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: archBlock
   m_TagString: BlockInSpawn
   m_Icon: {fileID: 0}
@@ -186,9 +186,9 @@ MonoBehaviour:
   _allowMultiGrasp: 1
   _moveObjectWhenGrasped: 1
   graspedMovementType: 0
-  _overrideInteractionLayer: 0
+  _overrideInteractionLayer: 1
   _interactionLayer:
-    layerIndex: 0
+    layerIndex: 8
   _overrideNoContactLayer: 0
   _noContactLayer:
     layerIndex: 0
@@ -301,7 +301,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5492544242343671901}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pCube1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -332,7 +332,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1628990397984124057}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pCylinder1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -363,7 +363,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4242904367987404853}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: transform1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -1080,15 +1080,15 @@ MonoBehaviour:
   hoverActivationRadius: 0.2
   touchActivationRadius: 0.075
   multiGraspHoldingMode: 0
-  _autoGenerateLayers: 1
+  _autoGenerateLayers: 0
   _templateLayer:
     layerIndex: 0
   _interactionLayer:
-    layerIndex: 10
-  _interactionNoContactLayer:
-    layerIndex: 11
-  _contactBoneLayer:
     layerIndex: 12
+  _interactionNoContactLayer:
+    layerIndex: 10
+  _contactBoneLayer:
+    layerIndex: 9
   _drawControllerRuntimeGizmos: 0
 --- !u!1 &5387509125164473580
 GameObject:
@@ -2579,6 +2579,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114193398573130750, guid: df84af96020c94b4695aec5c3427db16,
         type: 3}
+      propertyPath: _overrideNoContactLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114193398573130750, guid: df84af96020c94b4695aec5c3427db16,
+        type: 3}
+      propertyPath: _noContactLayer.layerIndex
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 114193398573130750, guid: df84af96020c94b4695aec5c3427db16,
+        type: 3}
       propertyPath: _OnPress.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -2722,6 +2732,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114193398573130750, guid: df84af96020c94b4695aec5c3427db16,
         type: 3}
+      propertyPath: _overrideNoContactLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114193398573130750, guid: df84af96020c94b4695aec5c3427db16,
+        type: 3}
+      propertyPath: _noContactLayer.layerIndex
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 114193398573130750, guid: df84af96020c94b4695aec5c3427db16,
+        type: 3}
       propertyPath: _OnPress.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -2862,6 +2882,16 @@ PrefabInstance:
         type: 3}
       propertyPath: _ignoreHoverMode
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114193398573130750, guid: df84af96020c94b4695aec5c3427db16,
+        type: 3}
+      propertyPath: _overrideNoContactLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114193398573130750, guid: df84af96020c94b4695aec5c3427db16,
+        type: 3}
+      propertyPath: _noContactLayer.layerIndex
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 114193398573130750, guid: df84af96020c94b4695aec5c3427db16,
         type: 3}
@@ -3090,6 +3120,16 @@ PrefabInstance:
         type: 3}
       propertyPath: _ignoreHoverMode
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114193398573130750, guid: df84af96020c94b4695aec5c3427db16,
+        type: 3}
+      propertyPath: _overrideNoContactLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114193398573130750, guid: df84af96020c94b4695aec5c3427db16,
+        type: 3}
+      propertyPath: _noContactLayer.layerIndex
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 114193398573130750, guid: df84af96020c94b4695aec5c3427db16,
         type: 3}

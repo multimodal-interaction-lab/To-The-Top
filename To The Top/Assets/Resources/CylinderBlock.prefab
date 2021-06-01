@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 8729663100263919257}
   - component: {fileID: 3025091597359536166}
   - component: {fileID: 3150780655249858503}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CylinderBlock
   m_TagString: BlockInSpawn
   m_Icon: {fileID: 0}
@@ -152,9 +152,9 @@ MonoBehaviour:
   _allowMultiGrasp: 1
   _moveObjectWhenGrasped: 1
   graspedMovementType: 0
-  _overrideInteractionLayer: 0
+  _overrideInteractionLayer: 1
   _interactionLayer:
-    layerIndex: 0
+    layerIndex: 8
   _overrideNoContactLayer: 0
   _noContactLayer:
     layerIndex: 0
