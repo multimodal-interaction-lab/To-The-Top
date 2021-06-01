@@ -3,11 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-/*
- * Attach this script to a despawn plane which should have a collider with trigger enabled and a rigidbody that is kinematic.
- * The despawn plane should be invisible and have a parent, child, or sibling that is a visible plane with a mesh collider to stop the object
- */
-
 public class Boundary : MonoBehaviourPun
 {
 
@@ -37,7 +32,7 @@ public class Boundary : MonoBehaviourPun
             if (PhotonNetwork.IsConnected == true && ((BuildingBlock)component).playerNum == PhotonNetwork.LocalPlayer.ActorNumber)
             {
                 Debug.Log("Penalty for player " + PhotonNetwork.LocalPlayer.ActorNumber + " due to block belonging to " + ((BuildingBlock)component).playerNum);
-                ScoreKeeper.GetComponent<Score>().AddPenalty(((BuildingBlock)component).playerNum);
+                ScoreKeeper.GetComponent<Score>().AddPenalty();
             }
 
             ((BuildingBlock)component).Despawn();

@@ -60,9 +60,9 @@ public class Score : MonoBehaviourPun, IPunObservable
     }
 
     // Called when block player spawned falls out of bounds
-    public void AddPenalty(int playerNum)
+    public void AddPenalty()
     {
-        penalties[playerNum - 1] += 1;
+        penalties[localPlayerNumber - 1] += 1;
         penaltyText.text = "Penalties: " + penalties[localPlayerNumber - 1].ToString();
         Debug.Log("Increment penalty array at index: " + (localPlayerNumber - 1));
     }
