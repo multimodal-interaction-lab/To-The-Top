@@ -2306,7 +2306,18 @@ MonoBehaviour:
   _springForce: 0.1
   _OnPress:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 736869938}
+        m_MethodName: startSPGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _OnUnpress:
     m_PersistentCalls:
       m_Calls: []
@@ -4729,8 +4740,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aae984a13ae42a479225017789c285b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BackToMM: {fileID: 1500279462}
-  BackToMP: {fileID: 1668761137}
   MMObjects:
   - {fileID: 329615255}
   - {fileID: 666665653}
@@ -4742,12 +4751,14 @@ MonoBehaviour:
   MPObjects:
   - {fileID: 94019785}
   - {fileID: 1573450372}
+  - {fileID: 1500279462}
   CRObjects: []
   JRObjects: []
   STObjects: []
   CDObjects:
   - {fileID: 628124802}
   - {fileID: 1772068739}
+  - {fileID: 1500279462}
   QGObjects:
   - {fileID: 700329656}
   - {fileID: 454435659}
@@ -8016,7 +8027,18 @@ MonoBehaviour:
   _springForce: 0.1
   _OnPress:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 736869938}
+        m_MethodName: joinMPGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _OnUnpress:
     m_PersistentCalls:
       m_Calls: []
@@ -9631,7 +9653,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1668761138
 Transform:
   m_ObjectHideFlags: 0
@@ -10569,7 +10591,18 @@ MonoBehaviour:
   _springForce: 0.1
   _OnPress:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 736869938}
+        m_MethodName: menuST
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _OnUnpress:
     m_PersistentCalls:
       m_Calls: []

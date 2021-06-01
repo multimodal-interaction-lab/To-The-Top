@@ -5,10 +5,6 @@ using UnityEngine;
 public class MenuBehavior : MonoBehaviour
 {
     // Each list represents the components of a 'screen' in the menu
-    //public List<GameObject> SharedObjects;  // Includes back buttons which are shared by multiple screens
-    // 0 -> BackToMM button, 1-> BackToMP button
-    public GameObject BackToMM;
-    public GameObject BackToMP;
     public List<GameObject> MMObjects;      // Main menu screen
     public List<GameObject> MPObjects;      // Multiplayer mode selection screen
     public List<GameObject> CRObjects;      // Create room screen
@@ -16,7 +12,7 @@ public class MenuBehavior : MonoBehaviour
     public List<GameObject> STObjects;      // Settings screen
     public List<GameObject> CDObjects;      // Credits screen
     public List<GameObject> QGObjects;      // Confirmation screen for quitting the game
-    
+
     // Triggers at the beginning of the scene opening
     void Start()
     {
@@ -35,9 +31,6 @@ public class MenuBehavior : MonoBehaviour
         hideObjectList(ref STObjects);
         hideObjectList(ref CDObjects);
         hideObjectList(ref QGObjects);
-        //hideObjectList(ref SharedObjects);
-        BackToMM.SetActive(false);
-        BackToMP.SetActive(false);
 
         Debug.Log("Finished hiding All Elements");
     }
@@ -45,20 +38,10 @@ public class MenuBehavior : MonoBehaviour
     // Switches to MM screen
     public void menuMM()
     {
-        menuHideAllElements();  // Hides all elements
+        menuHideAllElements();          // Hides all elements
         showObjectList(ref MMObjects);  // Shows only the elements in the main menu
 
-        Debug.Log("Showing Main Menu");
-    }
-
-    // Switches to credits screen
-    public void menuCD()
-    {
-        menuHideAllElements();
-        showObjectList(ref CDObjects);
-        //SharedObjects[0].SetActive(true);
-        BackToMM.SetActive(true);
-        Debug.Log("Showing Credits");
+        Debug.Log("Showing main menu screen");
     }
 
     // Switches to multiplayer select screen
@@ -66,11 +49,39 @@ public class MenuBehavior : MonoBehaviour
     {
         menuHideAllElements();
         showObjectList(ref MPObjects);
-        //SharedObjects[0].SetActive(true);
-        BackToMM.SetActive(true);
-        Debug.Log("Showing Multiplayer");
+        Debug.Log("Showing multiplayer select screen");
     }
 
+    // Switches to create room screen
+    // On hold until multiplayer testing is done
+    public void menuCR()
+    {
+        Debug.Log("Showing create room screen");
+    }
+
+    // Switches to join room screen
+    // On hold until multiplayer testing is done
+    public void menuJR()
+    {
+        Debug.Log("Showing join room screen");
+    }
+
+    // Switches to settings screen
+    // On hold
+    public void menuST()
+    {
+        Debug.Log("Showing settings screen");
+    }   
+
+    // Switches to credits screen
+    public void menuCD()
+    {
+        menuHideAllElements();
+        showObjectList(ref CDObjects);
+        Debug.Log("Showing Credits");
+    }
+
+    // Switches to quit game confirmation screen
     public void menuQG()
     {
         menuHideAllElements();
@@ -99,6 +110,21 @@ public class MenuBehavior : MonoBehaviour
     // Exits the game
     public void quitGame()
     {
+        Debug.Log("Attempting to quit game...");
         Application.Quit();
+    }
+
+    // Will initialize a local singleplayer game
+    // On hold until we have a singleplayer scene set up
+    public void startSPGame()
+    {
+        Debug.Log("Attempted to start a SP game");
+    }
+
+    // Joins random MP game
+    // In progress...
+    public void joinMPGame()
+    {
+        Debug.Log("Attempted to join a random MP game");
     }
 }
