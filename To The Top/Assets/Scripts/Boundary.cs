@@ -22,7 +22,7 @@ public class Boundary : MonoBehaviourPun
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
 
@@ -36,6 +36,7 @@ public class Boundary : MonoBehaviourPun
 
             if (PhotonNetwork.IsConnected == true && ((BuildingBlock)component).playerNum == PhotonNetwork.LocalPlayer.ActorNumber)
             {
+                Debug.Log("Penalty for player " + PhotonNetwork.LocalPlayer.ActorNumber + " due to block belonging to " + ((BuildingBlock)component).playerNum);
                 ScoreKeeper.GetComponent<Score>().AddPenalty();
             }
 

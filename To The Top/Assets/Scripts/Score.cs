@@ -42,9 +42,14 @@ public class Score : MonoBehaviourPun, IPunObservable
     void Start()
     {
         localPlayerNumber = PhotonNetwork.LocalPlayer.ActorNumber;
-        scores = new float[4];
-        heights = new float[4];
-        penalties = new float[4];
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            scores = new float[4];
+            heights = new float[4];
+            penalties = new float[4];
+        }
+
         playerNameText.text = "Player " + localPlayerNumber;
         heightText.text = "Height: 0";
     }
@@ -61,6 +66,7 @@ public class Score : MonoBehaviourPun, IPunObservable
     {
         penalties[localPlayerNumber - 1] += 1;
         penaltyText.text = "Penalties: " + penalties[localPlayerNumber - 1].ToString();
+        Debug.Log("Increment penalty array at index: "+ (localPlayerNumber - 1));
     }
 
 
