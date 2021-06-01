@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4666272775720269083}
   - component: {fileID: 4666272775720269082}
   m_Layer: 0
-  m_Name: CubeBlock
+  m_Name: BoxBlock
   m_TagString: BlockInSpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 4666272775720269085}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.288, y: 1.2181, z: 1.3974}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 0.25, y: 0.075, z: 0.075}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6c6b5210ee888aa4ead3137db80fda38, type: 2}
+  - {fileID: 2100000, guid: 62b39d7ee80e99e4bbbb7011e7e0645f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
