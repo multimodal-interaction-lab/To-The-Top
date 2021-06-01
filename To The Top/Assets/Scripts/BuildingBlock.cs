@@ -18,10 +18,15 @@ public class BuildingBlock : MonoBehaviourPun
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
+        
+        /*
         if (PhotonNetwork.IsConnected == true)
         {
             playerNum = PhotonNetwork.LocalPlayer.ActorNumber;
+        
         }
+        */
+
         Spawn();
     }
 

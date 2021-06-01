@@ -15,6 +15,8 @@ public class BlockGenerator : MonoBehaviourPun
         if (PhotonNetwork.IsConnected == true)
         {
             spawnedBlock = PhotonNetwork.Instantiate(blockToSpawn.name, transform.position, transform.rotation);
+            spawnedBlock.GetComponent<BuildingBlock>().playerNum = PhotonNetwork.LocalPlayer.ActorNumber;
+            Debug.Log("Spawned block for player " + PhotonNetwork.LocalPlayer.ActorNumber);
         }
         else
         {
