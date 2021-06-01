@@ -33,12 +33,13 @@ public class Boundary : MonoBehaviourPun
         // if the colliding component is attached to a block with a BuildingBlock script its Despawn function is called
         if (other.gameObject.TryGetComponent(typeof(BuildingBlock), out Component component))
         {
-            ((BuildingBlock)component).Despawn();
 
-            if (((BuildingBlock)component).playerNum == PhotonNetwork.LocalPlayer.ActorNumber)
+            if (PhotonNetwork.IsConnected == true && ((BuildingBlock)component).playerNum == PhotonNetwork.LocalPlayer.ActorNumber)
             {
                 ScoreKeeper.GetComponent<Score>().AddPenalty();
             }
+
+            ((BuildingBlock)component).Despawn();
         }
     }
 }
