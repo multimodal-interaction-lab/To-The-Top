@@ -31,9 +31,9 @@ public class Score : MonoBehaviourPun, IPunObservable
         }
         else
         {
-            scores = (float[])stream.ReceiveNext();
-            heights = (float[])stream.ReceiveNext();
-            penalties = (float[])stream.ReceiveNext();
+            this.scores = (float[])stream.ReceiveNext();
+            this.heights = (float[])stream.ReceiveNext();
+            this.penalties = (float[])stream.ReceiveNext();
         }
 
     }
@@ -43,12 +43,10 @@ public class Score : MonoBehaviourPun, IPunObservable
     {
         localPlayerNumber = PhotonNetwork.LocalPlayer.ActorNumber;
 
-        if (PhotonNetwork.IsMasterClient)
-        {
-            scores = new float[4];
-            heights = new float[4];
-            penalties = new float[4];
-        }
+        scores = new float[4];
+        heights = new float[4];
+        penalties = new float[4];
+
 
         playerNameText.text = "Player " + localPlayerNumber;
         heightText.text = "Height: 0";
@@ -62,11 +60,11 @@ public class Score : MonoBehaviourPun, IPunObservable
     }
 
     // Called when block player spawned falls out of bounds
-    public void AddPenalty()
+    public void AddPenalty(int playerNum)
     {
-        penalties[localPlayerNumber - 1] += 1;
+        penalties[playerNum - 1] += 1;
         penaltyText.text = "Penalties: " + penalties[localPlayerNumber - 1].ToString();
-        Debug.Log("Increment penalty array at index: "+ (localPlayerNumber - 1));
+        Debug.Log("Increment penalty array at index: " + (localPlayerNumber - 1));
     }
 
 
