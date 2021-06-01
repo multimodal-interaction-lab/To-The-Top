@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4666272775720269082}
   - component: {fileID: 5335841856967687418}
   - component: {fileID: 851942577803828589}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CubeBlock
   m_TagString: BlockInSpawn
   m_Icon: {fileID: 0}
@@ -136,9 +136,9 @@ MonoBehaviour:
   _allowMultiGrasp: 1
   _moveObjectWhenGrasped: 1
   graspedMovementType: 0
-  _overrideInteractionLayer: 0
+  _overrideInteractionLayer: 1
   _interactionLayer:
-    layerIndex: 0
+    layerIndex: 8
   _overrideNoContactLayer: 0
   _noContactLayer:
     layerIndex: 0
@@ -188,6 +188,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnMenuObject: {fileID: 0}
   spawnPointObject: {fileID: 0}
+  playerNum: 0
 --- !u!114 &5335841856967687418
 MonoBehaviour:
   m_ObjectHideFlags: 0

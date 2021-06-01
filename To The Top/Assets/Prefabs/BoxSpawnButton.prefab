@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8766583569670282863}
   - component: {fileID: 8766583569670282862}
   - component: {fileID: 1612405716236129991}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: BoxSpawnButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,9 +76,9 @@ MonoBehaviour:
   _overrideInteractionLayer: 1
   _interactionLayer:
     layerIndex: 5
-  _overrideNoContactLayer: 0
+  _overrideNoContactLayer: 1
   _noContactLayer:
-    layerIndex: 0
+    layerIndex: 11
   _eventTable:
     _entries: []
   _controlEnabled: 1
@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 8766583570260362306}
   - component: {fileID: 8766583570260362305}
   - component: {fileID: 8766583570260362304}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Button Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -242,7 +242,7 @@ GameObject:
   - component: {fileID: 8766583570639119948}
   - component: {fileID: 8766583570639119987}
   - component: {fileID: 8766583570639119986}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}

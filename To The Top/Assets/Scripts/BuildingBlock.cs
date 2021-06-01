@@ -8,6 +8,7 @@ public class BuildingBlock : MonoBehaviourPun
 
     public GameObject spawnMenuObject;
     public GameObject spawnPointObject;
+    public int playerNum;   // which player spawned this block
 
     Rigidbody rigidbody;
     bool fresh = true;

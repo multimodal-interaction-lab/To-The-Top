@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3967709727169652937}
   - component: {fileID: 3967709727169652936}
   - component: {fileID: 1143505944323909432}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: ArchSpawnButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,9 +76,9 @@ MonoBehaviour:
   _overrideInteractionLayer: 1
   _interactionLayer:
     layerIndex: 5
-  _overrideNoContactLayer: 0
+  _overrideNoContactLayer: 1
   _noContactLayer:
-    layerIndex: 0
+    layerIndex: 11
   _eventTable:
     _entries: []
   _controlEnabled: 1
@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 3967709728138481898}
   - component: {fileID: 3967709728138481876}
   - component: {fileID: 3967709728138481877}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Arch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -242,7 +242,7 @@ GameObject:
   - component: {fileID: 3967709728835056356}
   - component: {fileID: 3967709728835056358}
   - component: {fileID: 3967709728835056359}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Button Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -11,7 +11,13 @@ public class GameManager : MonoBehaviourPunCallbacks
 {
     [Tooltip("The prefab to use for representing the player")]
     public GameObject playerPrefab;
-    public GameObject tablePrefab;
+    public Transform table1;
+    public Transform table2;
+    public Transform table3;
+    public Transform table4;
+
+    GameObject localPlayer;
+    public GameObject scoreKeeper;
 
     private void Start()
     {
@@ -22,17 +28,26 @@ public class GameManager : MonoBehaviourPunCallbacks
         else
         {
             Debug.LogFormat("We are Instantiating LocalPlayer from {0}", Application.loadedLevelName);
+            PhotonNetwork.NickName = "Player " + PhotonNetwork.LocalPlayer.ActorNumber;
             
             if (PhotonNetwork.LocalPlayer.ActorNumber == 1)
             {
-                Instantiate(this.playerPrefab, new Vector3(-1f, 1f, 0f), Quaternion.identity);
-                Instantiate(this.tablePrefab, new Vector3(1f, 1f, 0f), Quaternion.identity);
+                localPlayer = Instantiate(this.playerPrefab, table1.position, table1.rotation);
             }
             else if (PhotonNetwork.LocalPlayer.ActorNumber == 2)
             {
-                Instantiate(this.playerPrefab, new Vector3(1f, 1f, 0f), Quaternion.identity);
-                Instantiate(this.tablePrefab, new Vector3(-1f, 1f, 0f), Quaternion.identity);
+                localPlayer = Instantiate(this.playerPrefab, table2.position, table2.rotation);
             }
+            else if (PhotonNetwork.LocalPlayer.ActorNumber == 3)
+            {
+                localPlayer = Instantiate(this.playerPrefab, table3.position, table3.rotation);
+            }
+            else if (PhotonNetwork.LocalPlayer.ActorNumber == 4)
+            {
+                localPlayer = Instantiate(this.playerPrefab, table4.position, table4.rotation);
+            }
+
+            scoreKeeper.GetComponent<Score>().heightScanner = localPlayer.transform.Find("HeightScanner").gameObject;
         }
     }
 
@@ -46,7 +61,6 @@ public class GameManager : MonoBehaviourPunCallbacks
         if (PhotonNetwork.IsMasterClient)
         {
             Debug.LogFormat("OnPlayerEnteredRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient); // called before OnPlayerLeftRoom
-            LoadArena();
         }
     }
 
@@ -59,9 +73,6 @@ public class GameManager : MonoBehaviourPunCallbacks
         if (PhotonNetwork.IsMasterClient)
         {
             Debug.LogFormat("OnPlayerLeftRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient); // called before OnPlayerLeftRoom
-
-
-            LoadArena();
         }
     }
     /// <summary>
@@ -86,15 +97,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     #endregion
 
     #region Private Methods
-    void LoadArena()
-    {
-        if (!PhotonNetwork.IsMasterClient)
-        {
-            Debug.LogError("PhotonNetwork : Trying to Load a level but we are not the master Client");
-        }
-        Debug.LogFormat("PhotonNetwork : Loading Level : {0}", PhotonNetwork.CurrentRoom.PlayerCount);
-        PhotonNetwork.LoadLevel("Room for " + PhotonNetwork.CurrentRoom.PlayerCount);
-    }
+    
 
 
     #endregion
