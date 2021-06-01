@@ -7,16 +7,19 @@ public class HeightTriggerBehavior : MonoBehaviour
     float lastTowerHeight;      // measures the current height of the tower
     float planeSpeed = 1f;      // speed that the height plane moves by
     Vector3 planeBase;          // coordinates for the plane's home position
-    bool active;         // the plane will only move down while active is true        
+    bool active;                // the plane will only move down while active is true        
     bool foundTop;              // will be false while the scanner is looking for the top of the tower 
                                 // and becomes true when it collides with a blockInPlay
-    float heightFromTable = 4f; // the height difference between the surface of the table and the home base
+    float playerStartHeight;    // height of the table where player starts
+
 
     void Start()
     {
+        transform.localPosition = new Vector3(0, 200, 0);
         planeBase = transform.position;     // Saves initial position as the 'base'
         active = true;
         foundTop = false;
+        playerStartHeight = transform.parent.position.y;
     }
 
     void FixedUpdate()
@@ -59,15 +62,23 @@ public class HeightTriggerBehavior : MonoBehaviour
             }
             toBase();
         }
-        Debug.Log("Last tag for collision: " + collision.gameObject.tag);
+        //Debug.Log("Last tag for collision: " + collision.gameObject.tag);
         //toBase(); // DEBUG
     }
 
     float getTowerHeight()
     {
         float displacement = planeBase.y - transform.position.y;
-        Debug.Log("Displacement: " + displacement + ", heightFromTable: " + heightFromTable);
-        return heightFromTable - displacement;
+        //Debug.Log("planeBase.y: " + planeBase.y);
+        //Debug.Log("transform.position.y: " + transform.position.y);
+        //Debug.Log("Displacement: " + displacement + ", heightFromTable: " + heightFromTable);
+        
+        return (planeBase.y - displacement - playerStartHeight);
+    }
+
+    public float readTowerHeight()
+    {
+        return lastTowerHeight;
     }
     
     /*

@@ -16,6 +16,9 @@ public class GameManager : MonoBehaviourPunCallbacks
     public Transform table3;
     public Transform table4;
 
+    GameObject localPlayer;
+    public GameObject scoreKeeper;
+
     private void Start()
     {
         if (playerPrefab == null)
@@ -29,29 +32,22 @@ public class GameManager : MonoBehaviourPunCallbacks
             
             if (PhotonNetwork.LocalPlayer.ActorNumber == 1)
             {
-                //Instantiate(this.playerPrefab, new Vector3(-1f, 1f, 0f), Quaternion.identity);
-                //Instantiate(this.tablePrefab, new Vector3(1f, 1f, 0f), Quaternion.identity);
-
-                Instantiate(this.playerPrefab, table1.position, table1.rotation);
+                localPlayer = Instantiate(this.playerPrefab, table1.position, table1.rotation);
             }
             else if (PhotonNetwork.LocalPlayer.ActorNumber == 2)
             {
-                //Instantiate(this.playerPrefab, new Vector3(1f, 1f, 0f), Quaternion.identity);
-                //Instantiate(this.tablePrefab, new Vector3(-1f, 1f, 0f), Quaternion.identity);
-                Instantiate(this.playerPrefab, table2.position, table2.rotation);
+                localPlayer = Instantiate(this.playerPrefab, table2.position, table2.rotation);
             }
             else if (PhotonNetwork.LocalPlayer.ActorNumber == 3)
             {
-                //Instantiate(this.playerPrefab, new Vector3(1f, 1f, 0f), Quaternion.identity);
-                //Instantiate(this.tablePrefab, new Vector3(-1f, 1f, 0f), Quaternion.identity);
-                Instantiate(this.playerPrefab, table3.position, table3.rotation);
+                localPlayer = Instantiate(this.playerPrefab, table3.position, table3.rotation);
             }
             else if (PhotonNetwork.LocalPlayer.ActorNumber == 4)
             {
-                //Instantiate(this.playerPrefab, new Vector3(1f, 1f, 0f), Quaternion.identity);
-                //Instantiate(this.tablePrefab, new Vector3(-1f, 1f, 0f), Quaternion.identity);
-                Instantiate(this.playerPrefab, table4.position, table4.rotation);
+                localPlayer = Instantiate(this.playerPrefab, table4.position, table4.rotation);
             }
+
+            scoreKeeper.GetComponent<Score>().heightScanner = localPlayer.transform.Find("HeightScanner").gameObject;
         }
     }
 
