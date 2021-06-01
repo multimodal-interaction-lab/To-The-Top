@@ -188,6 +188,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnMenuObject: {fileID: 0}
   spawnPointObject: {fileID: 0}
+  playerNum: 0
 --- !u!114 &4649146376681972580
 MonoBehaviour:
   m_ObjectHideFlags: 0

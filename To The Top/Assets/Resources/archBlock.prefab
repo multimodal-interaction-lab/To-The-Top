@@ -238,6 +238,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnMenuObject: {fileID: 0}
   spawnPointObject: {fileID: 0}
+  playerNum: 0
 --- !u!64 &892106128328001054
 MeshCollider:
   m_ObjectHideFlags: 0
