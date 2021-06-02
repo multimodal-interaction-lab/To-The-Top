@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public Transform table2;
     public Transform table3;
     public Transform table4;
+    string homeScene = "TestGameMenu";
 
     GameObject localPlayer;
     public GameObject scoreKeeper;
@@ -80,7 +81,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     /// </summary>
     public override void OnLeftRoom()
     {
-        SceneManager.LoadScene("Launcher");
+        SceneManager.LoadScene(homeScene);
     }
     #endregion
 
