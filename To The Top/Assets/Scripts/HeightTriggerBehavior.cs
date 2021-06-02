@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class HeightTriggerBehavior : MonoBehaviour
 {
-    float lastTowerHeight;      // measures the current height of the tower
-    float planeSpeed = 1f;      // speed that the height plane moves by
-    Vector3 planeBase;          // coordinates for the plane's home position
-    bool active;                // the plane will only move down while active is true        
-    bool foundTop;              // will be false while the scanner is looking for the top of the tower 
-                                // and becomes true when it collides with a blockInPlay
-    float playerStartHeight;    // height of the table where player starts
+    float lastTowerHeight;              // measures the current height of the tower
+    float lastTowerHeightNorm;          // equal to the last height, but passed through our normalization formula for display
+    float planeSpeed = 1f;              // speed that the height plane moves by
+    Vector3 planeBase;                  // coordinates for the plane's home position
+    bool active;                        // the plane will only move down while active is true        
+    bool foundTop;                      // will be false while the scanner is looking for the top of the tower 
+                                        // and becomes true when it collides with a blockInPlay
+    float playerStartHeight;            // height of the table where player starts
+    float baseHeightError = 0.01309f;   // an error value for the height of the table
 
 
     void Start()
@@ -35,7 +37,7 @@ public class HeightTriggerBehavior : MonoBehaviour
     {
         transform.position = planeBase;
         foundTop = false;
-        Debug.Log("lastTowerHeight for loop: " + lastTowerHeight); // DEBUG
+        // Debug.Log("lastTowerHeight for loop: " + lastTowerHeight); // DEBUG
     }
 
     // Detects collisions
@@ -49,6 +51,7 @@ public class HeightTriggerBehavior : MonoBehaviour
             {
                 foundTop = true;
                 lastTowerHeight = getTowerHeight();
+                lastTowerHeightNorm = getHeightNorm();
             }
         }
         else if (collision.gameObject.tag == "Table")
@@ -57,8 +60,9 @@ public class HeightTriggerBehavior : MonoBehaviour
             if (!foundTop)
             {
                 foundTop = true;
-                //lastTowerHeight = getTowerHeight(); // DEBUG
-                lastTowerHeight = 0f;
+                lastTowerHeight = getTowerHeight(); // DEBUG
+                lastTowerHeightNorm = getHeightNorm();
+                //lastTowerHeight = 0f;
             }
             toBase();
         }
@@ -76,11 +80,21 @@ public class HeightTriggerBehavior : MonoBehaviour
         return (planeBase.y - displacement - playerStartHeight);
     }
 
+    float getHeightNorm()
+    {
+        return (float)(System.Math.Round((lastTowerHeight-baseHeightError)*100,2));
+    }
+
     public float readTowerHeight()
     {
         return lastTowerHeight;
     }
-    
+
+    public float readTowerHeightNorm()
+    {
+        return lastTowerHeightNorm;
+    }
+
     /*
     public void pauseScan()
     {
@@ -92,4 +106,4 @@ public class HeightTriggerBehavior : MonoBehaviour
         active = true;
     }
     */
-    }
+}
