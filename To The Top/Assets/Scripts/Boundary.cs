@@ -14,21 +14,12 @@ public class Boundary : MonoBehaviourPun
         ScoreKeeper = GameObject.Find("ScoreKeeper");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-
     // Called when a collision is detected.
     private void OnTriggerEnter(Collider other)
     {
-
         // if the colliding component is attached to a block with a BuildingBlock script its Despawn function is called
         if (other.gameObject.TryGetComponent(typeof(BuildingBlock), out Component component))
         {
-
             if (PhotonNetwork.IsConnected == true && ((BuildingBlock)component).playerNum == PhotonNetwork.LocalPlayer.ActorNumber)
             {
                 Debug.Log("Penalty for player " + PhotonNetwork.LocalPlayer.ActorNumber + " due to block belonging to " + ((BuildingBlock)component).playerNum);

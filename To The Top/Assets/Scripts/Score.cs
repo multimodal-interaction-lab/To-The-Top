@@ -55,6 +55,8 @@ public class Score : MonoBehaviourPun, IPunObservable
         playerNameText.text = "Player " + localPlayerNumber;
         heightText.text = "Height (raw): 0";
         heightNormText.text = "Height: 0 cm";
+        scoreText.text = "Score: 0 points";
+        penaltyText.text = "Penalties: 0";
     }
 
     // Update is called once per frame
@@ -62,9 +64,11 @@ public class Score : MonoBehaviourPun, IPunObservable
     {
         heights[localPlayerNumber - 1] = heightScanner.GetComponent<HeightTriggerBehavior>().readTowerHeight();
         heightsNorm[localPlayerNumber - 1] = heightScanner.GetComponent<HeightTriggerBehavior>().readTowerHeightNorm();
+        scores[localPlayerNumber - 1] = (float) CalculateScore(localPlayerNumber - 1);
 
         heightText.text = "Height (raw): " + heights[localPlayerNumber - 1].ToString();
-        heightNormText.text = "Height: " + heightsNorm[localPlayerNumber - 1].ToString() + "cm";
+        heightNormText.text = "Height: " + heightsNorm[localPlayerNumber - 1].ToString() + " cm";
+        scoreText.text = "Score: " + scores[localPlayerNumber - 1].ToString() + " points";
     }
 
     // Called when block player spawned falls out of bounds
@@ -73,5 +77,12 @@ public class Score : MonoBehaviourPun, IPunObservable
         penalties[localPlayerNumber - 1] += 1;
         penaltyText.text = "Penalties: " + penalties[localPlayerNumber - 1].ToString();
         Debug.Log("Increment penalty array at index: " + (localPlayerNumber - 1));
+    }
+
+    int CalculateScore(int playerNum)
+    {
+        int tempScore = (10 * (int)heightsNorm[playerNum]) - (int)penalties[playerNum];
+        Debug.Log("Player " + (playerNum)+ ", hNorm " + heightsNorm[playerNum] + ", pen " + penalties[playerNum] + ", score " + tempScore);
+        return tempScore;
     }
 }

@@ -10,7 +10,7 @@ public class BuildingBlock : MonoBehaviourPun
     public GameObject spawnPointObject;
     public int playerNum;   // which player spawned this block
 
-    Rigidbody rigidbody;
+    new Rigidbody rigidbody;
     bool fresh = true;
     bool despawning = false;
     float timeFromDespawn;
