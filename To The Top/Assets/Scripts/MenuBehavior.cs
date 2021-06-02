@@ -70,6 +70,8 @@ public class MenuBehavior : MonoBehaviour
     // On hold
     public void menuST()
     {
+        menuHideAllElements();
+        showObjectList(ref STObjects);
         Debug.Log("Showing settings screen");
     }   
 
