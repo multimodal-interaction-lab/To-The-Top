@@ -14,6 +14,24 @@ public class AudioManager : MonoBehaviour
     //Sound source for client side UI sound effects
     public AudioSource SFXSource;
 
+
+    public bool playMusicOnAwake;
+
+    public MusicAsset[] playlist;
+
+    private List<MusicAsset> currentPlaylist;
+    private int currentPlaylistIndex;
+
+    private bool musicStarted;
+    private bool playingMusic;
+    private bool MusicDone
+    {
+        get
+        {
+            return musicStarted && musicSource.time <= 0f;
+        }
+    }
+
     [SerializeField]
     public AudioMixerGroup masterMixer;
     [SerializeField]
@@ -23,6 +41,35 @@ public class AudioManager : MonoBehaviour
 
     private AudioSource[] audioSources;
 
+    public void Awake()
+    {
+        playingMusic = false;
+        musicStarted = false;
+        if (playMusicOnAwake)
+        {
+            GenerateCurrentPlaylist();
+            PlayNextInPlaylist();
+        }
+    }
+
+    public void Update()
+    {
+        if (playingMusic)
+        {
+            musicStarted |= musicSource.time > 0f;
+            if (MusicDone)
+            {
+                PlayNextInPlaylist();
+            }
+        }
+    }
+    //Plays a given music clip
+    public void PlayMusic(MusicAsset music)
+    {
+        musicSource.volume = music.volume;
+        musicSource.clip = music.audioClip;
+        musicSource.Play();
+    }
     //Plays a given sound effect clip
     public void PlaySFX(SFXAsset sfx)
     {
@@ -44,5 +91,33 @@ public class AudioManager : MonoBehaviour
             }
         }
         src.PlayOneShot(src.clip);
+    }
+    //Shuffles songs to play
+    public void GenerateCurrentPlaylist()
+    {
+        currentPlaylistIndex = 0;
+        var tempPlaylist = new List<MusicAsset>();
+        foreach (MusicAsset track in playlist)
+        {
+            tempPlaylist.Add(track);
+        }
+        currentPlaylist = new List<MusicAsset>();
+        while(tempPlaylist.Count > 0)
+        {
+            int randIndex = Random.Range(0, tempPlaylist.Count);
+            currentPlaylist.Add(tempPlaylist[randIndex]);
+            tempPlaylist.RemoveAt(randIndex);
+        }
+    }
+    //Plays next song in playlist, or shuffles new playlist if all songs played
+    public void PlayNextInPlaylist()
+    {
+        playingMusic = true;
+        if(currentPlaylistIndex >= currentPlaylist.Count)
+        {
+            GenerateCurrentPlaylist();
+        }
+        PlayMusic(currentPlaylist[currentPlaylistIndex]);
+        currentPlaylistIndex++;
     }
 }
