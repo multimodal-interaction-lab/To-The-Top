@@ -26,17 +26,23 @@ public class AudioManager : MonoBehaviour
     //Plays a given sound effect clip
     public void PlaySFX(SFXAsset sfx)
     {
-        SFXSource.pitch = Random.Range(sfx.minPitch, sfx.maxPitch);
-        SFXSource.volume = sfx.volume;
-        SFXSource.clip = sfx.audioClip;
-        if(sfx.alts.Length > 0)
+        PlaySFX(sfx, SFXSource);
+    }
+    //Plays a given sound effect clip at a specific source
+    public void PlaySFX(SFXAsset sfx, AudioSource src)
+    {
+
+        src.pitch = Random.Range(sfx.minPitch, sfx.maxPitch);
+        src.volume = sfx.volume;
+        src.clip = sfx.audioClip;
+        if (sfx.alts.Length > 0)
         {
             int chosenClipIndex = Random.Range(0, sfx.alts.Length + 1);
             if (chosenClipIndex != sfx.alts.Length)
             {
-                SFXSource.clip = sfx.alts[chosenClipIndex];
+                src.clip = sfx.alts[chosenClipIndex];
             }
         }
-        SFXSource.PlayOneShot(SFXSource.clip);
+        src.PlayOneShot(src.clip);
     }
 }

@@ -10,6 +10,9 @@ public class BuildingBlock : MonoBehaviourPun
     public GameObject spawnPointObject;
     public int playerNum;   // which player spawned this block
 
+    public SFXAsset despawnSound;
+
+    AudioSource audioSrc;
     Rigidbody rigidbody;
     bool fresh = true;
     bool despawning = false;
@@ -18,6 +21,7 @@ public class BuildingBlock : MonoBehaviourPun
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
+        audioSrc = GetComponent<AudioSource>();
         Spawn();
     }
 
@@ -79,14 +83,31 @@ public class BuildingBlock : MonoBehaviourPun
             yield return new WaitForSeconds(.01f);
         }
     }
+    //Normal Despawn plus the sound effect when block hits the ground
+    public void BoundaryDespawn()
+    {
+        if (PhotonNetwork.IsConnected)
+        {
+            PhotonView photonView = PhotonView.Get(this);
+            photonView.RPC("PlayDespawnSound", RpcTarget.All);
+        }
+        else
+        {
+            PlayDespawnSound();
+        }
+        Despawn();
+    }
+
 
     // Block will shrink and then disappear
     public void Despawn()
     {
+        
         despawning = true;
         timeFromDespawn = Time.time;
         gameObject.GetComponent<Collider>().enabled = false;
         StartCoroutine(DespawnCoroutine());
+        
     }
 
     public IEnumerator DespawnCoroutine()
@@ -98,6 +119,10 @@ public class BuildingBlock : MonoBehaviourPun
             yield return new WaitForSeconds(.01f);
         }
 
+        while (audioSrc.isPlaying)
+        {
+            yield return new WaitForSeconds(.2f);
+        }
         if (PhotonNetwork.IsConnected == true)
         {
             PhotonNetwork.Destroy(gameObject);
@@ -106,5 +131,10 @@ public class BuildingBlock : MonoBehaviourPun
         {
             Destroy(gameObject);
         }
+    }
+    [PunRPC]
+    public void PlayDespawnSound()
+    {
+        AudioManager.Instance.PlaySFX(despawnSound, audioSrc);
     }
 }

@@ -136,6 +136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blockToSpawn: {fileID: 1325095286254662561, guid: 118ec86c43e19c240b057b8ff11e95b3,
     type: 3}
+  pressSFX: {fileID: 11400000, guid: ac76d01adfa04c3448187fdb94f0f57b, type: 2}
 --- !u!1 &3967709728138481878
 GameObject:
   m_ObjectHideFlags: 0

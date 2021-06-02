@@ -323,3 +323,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blockToSpawn: {fileID: 4666272775720269085, guid: 3317abff4b5789c4aad812e869fe6de4,
     type: 3}
+  pressSFX: {fileID: 11400000, guid: ac76d01adfa04c3448187fdb94f0f57b, type: 2}
