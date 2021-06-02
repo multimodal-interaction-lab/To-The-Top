@@ -86,15 +86,9 @@ public class BuildingBlock : MonoBehaviourPun
     //Normal Despawn plus the sound effect when block hits the ground
     public void BoundaryDespawn()
     {
-        if (PhotonNetwork.IsConnected)
-        {
-            PhotonView photonView = PhotonView.Get(this);
-            photonView.RPC("PlayDespawnSound", RpcTarget.All);
-        }
-        else
-        {
-            PlayDespawnSound();
-        }
+
+        PlayDespawnSound();
+
         Despawn();
     }
 
