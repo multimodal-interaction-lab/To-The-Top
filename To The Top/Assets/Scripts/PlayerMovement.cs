@@ -10,8 +10,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [Tooltip("Table for player to revolve around")]
-    public GameObject table;
+    [Tooltip("Point for player to revolve around which should be center of table")]
+    public GameObject pointToCircle;
     public float rotationSpeed = 25f;
     public float moveSpeed = 0.75f;
 
@@ -20,6 +20,8 @@ public class PlayerMovement : MonoBehaviour
     bool moveUpFlag;
     bool moveDownFlag;
 
+    Vector3 startingPosition;
+
 
     void Start()
     {
@@ -27,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
         rotateRightFlag = false;
         moveUpFlag = false;
         moveDownFlag = false;
+        startingPosition = transform.position;
     }
 
     void FixedUpdate()
@@ -34,24 +37,38 @@ public class PlayerMovement : MonoBehaviour
 
         if (rotateLeftFlag)
         {
-            transform.RotateAround(table.transform.position, Vector3.up, rotationSpeed * Time.deltaTime);
+            transform.RotateAround(pointToCircle.transform.position, Vector3.up, rotationSpeed * Time.deltaTime);
         }
 
         if (rotateRightFlag)
         {
-            transform.RotateAround(table.transform.position, Vector3.up, rotationSpeed * Time.deltaTime * -1f);
+            transform.RotateAround(pointToCircle.transform.position, Vector3.up, rotationSpeed * Time.deltaTime * -1f);
         }
 
         if (moveUpFlag)
         {
             Vector3 moveVector = new Vector3(0f, moveSpeed * Time.deltaTime, 0f);
-            transform.position += moveVector;
+
+            float currentY = transform.position.y;
+            currentY += moveVector.y;
+
+            if (currentY <= 5)
+            {
+                transform.position += moveVector;
+            }
+
         }
 
         if (moveDownFlag)
         {
             Vector3 moveVector = new Vector3(0f, moveSpeed * Time.deltaTime * -1f, 0f);
-            transform.position += moveVector;
+            float currentY = transform.position.y;
+            currentY += moveVector.y;
+
+            if (currentY >= startingPosition.y)
+            {
+                transform.position += moveVector;
+            }
         }
 
     }
