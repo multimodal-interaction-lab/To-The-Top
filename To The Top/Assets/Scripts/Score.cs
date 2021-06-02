@@ -9,10 +9,12 @@ public class Score : MonoBehaviourPun, IPunObservable
     // Player scores are indexed at their  PhotonNetwork.LocalPlayer.ActorNumber - 1;
     public float[] scores;
     public float[] heights;
+    public float[] heightsNorm;
     public float[] penalties;
 
     public Text playerNameText;
     public Text heightText;
+    public Text heightNormText;
     public Text scoreText;
     public Text penaltyText;
 
@@ -27,12 +29,14 @@ public class Score : MonoBehaviourPun, IPunObservable
         {
             stream.SendNext(scores);
             stream.SendNext(heights);
+            stream.SendNext(heightsNorm);
             stream.SendNext(penalties);
         }
         else
         {
             this.scores = (float[])stream.ReceiveNext();
             this.heights = (float[])stream.ReceiveNext();
+            this.heightsNorm = (float[])stream.ReceiveNext();
             this.penalties = (float[])stream.ReceiveNext();
         }
 
@@ -45,18 +49,22 @@ public class Score : MonoBehaviourPun, IPunObservable
 
         scores = new float[4];
         heights = new float[4];
+        heightsNorm = new float[4];
         penalties = new float[4];
 
-
         playerNameText.text = "Player " + localPlayerNumber;
-        heightText.text = "Height: 0";
+        heightText.text = "Height (raw): 0";
+        heightNormText.text = "Height: 0 cm";
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         heights[localPlayerNumber - 1] = heightScanner.GetComponent<HeightTriggerBehavior>().readTowerHeight();
-        heightText.text = "Height: " + heights[localPlayerNumber - 1].ToString();
+        heightsNorm[localPlayerNumber - 1] = heightScanner.GetComponent<HeightTriggerBehavior>().readTowerHeightNorm();
+
+        heightText.text = "Height (raw): " + heights[localPlayerNumber - 1].ToString();
+        heightNormText.text = "Height: " + heightsNorm[localPlayerNumber - 1].ToString() + "cm";
     }
 
     // Called when block player spawned falls out of bounds
@@ -66,6 +74,4 @@ public class Score : MonoBehaviourPun, IPunObservable
         penaltyText.text = "Penalties: " + penalties[localPlayerNumber - 1].ToString();
         Debug.Log("Increment penalty array at index: " + (localPlayerNumber - 1));
     }
-
-
 }
