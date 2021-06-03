@@ -114,6 +114,7 @@ MonoBehaviour:
   spawnMenuObject: {fileID: 0}
   spawnPointObject: {fileID: 0}
   playerNum: 0
+  despawnSound: {fileID: 11400000, guid: f34d2d3ecb80c1f42baf945df24a0157, type: 2}
 --- !u!54 &5350916080534166265
 Rigidbody:
   m_ObjectHideFlags: 0

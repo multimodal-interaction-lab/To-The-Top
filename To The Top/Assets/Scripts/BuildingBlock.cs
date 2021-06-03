@@ -9,7 +9,10 @@ public class BuildingBlock : MonoBehaviourPun
     public GameObject spawnMenuObject;
     public GameObject spawnPointObject;
     public int playerNum;   // which player spawned this block
+    
+    public SFXAsset despawnSound;
 
+    AudioSource audioSrc;
     Rigidbody rigidbody;
     bool fresh = true;
     bool despawning = false;
@@ -18,6 +21,7 @@ public class BuildingBlock : MonoBehaviourPun
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
+        audioSrc = GetComponent<AudioSource>();
         Spawn();
     }
 
@@ -79,7 +83,12 @@ public class BuildingBlock : MonoBehaviourPun
             yield return new WaitForSeconds(.01f);
         }
     }
-
+    //Normal Despawn plus the sound effect when block hits the ground
+    public void BoundaryDespawn()
+    {
+        PlayDespawnSound();
+        Despawn();
+    }
     // Block will shrink and then disappear
     public void Despawn()
     {
@@ -106,5 +115,9 @@ public class BuildingBlock : MonoBehaviourPun
         {
             Destroy(gameObject);
         }
+    }
+    public void PlayDespawnSound()
+    {
+        AudioManager.Instance.PlaySFX(despawnSound, audioSrc);
     }
 }
