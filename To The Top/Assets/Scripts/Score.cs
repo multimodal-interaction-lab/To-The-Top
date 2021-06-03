@@ -84,6 +84,13 @@ public class Score : MonoBehaviourPun, IPunObservable
         heightNormText.text = "Height: " + heightsNorm[localPlayerNumber - 1].ToString() + " cm";
         penaltyText.text = "Penalties: " + penalties[localPlayerNumber - 1];
         scoreText.text = "Score: " + scores[localPlayerNumber - 1] + " points";
+
+
+        Debug.Log("Scores[0]: " + scores[0]); 
+        Debug.Log("Scores[1]: " + scores[1]);
+        Debug.Log("Scores[2]: " + scores[2]);
+        Debug.Log("Scores[3]: " + scores[3]);
+
     }
 
     // Called when block player spawned falls out of bounds
@@ -98,7 +105,8 @@ public class Score : MonoBehaviourPun, IPunObservable
         //scoreText.gameObject.SetActive(false);
         //penaltyText.gameObject.SetActive(false);
 
-        this.photonView.RPC("SyncScores",RpcTarget.All, localPlayerNumber, scores[localPlayerNumber - 1]);
+
+        this.photonView.RPC("SyncScores", RpcTarget.All, localPlayerNumber, scores[localPlayerNumber - 1]);
         resultsText.gameObject.SetActive(true);
 
 
@@ -121,6 +129,7 @@ public class Score : MonoBehaviourPun, IPunObservable
     [PunRPC]
     void SyncScores(int receivedPlayerNum, int score)
     {
+        Debug.Log("RPC called, receivedPlayerNum: " + receivedPlayerNum + " score: " + score);
         scores[receivedPlayerNum - 1] = score;
     }
 }
