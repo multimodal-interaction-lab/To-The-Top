@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7339903130610096370}
   - component: {fileID: 8174800487594812652}
+  - component: {fileID: -6046958791339069744}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -45,5 +46,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 5387509124274958826, guid: d102e31adf576804ebf92c3ef31d5854,
     type: 3}
-  tablePrefab: {fileID: 3175417937309592741, guid: 1f2c27a4e3501c04ea6b75f44bf84118,
-    type: 3}
+  scoreKeeper: {fileID: 0}
+  stateManagerPrefab: {fileID: 0}
+  timerText: {fileID: 0}
+  waitText: {fileID: 0}
+  resultsText: {fileID: 0}
+  beginText: {fileID: 0}
+  table1: {fileID: 0}
+  table2: {fileID: 0}
+  table3: {fileID: 0}
+  table4: {fileID: 0}
+  waitTime: 30
+  playTime: 30
+  endTime: 30
+--- !u!114 &-6046958791339069744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3981438331389809594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0

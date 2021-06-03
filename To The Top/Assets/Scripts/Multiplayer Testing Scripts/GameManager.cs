@@ -76,6 +76,8 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
                 DontDestroyOnLoad(stateManager);
             }
 
+
+
             // Check which state to use
             if (stateManager.GetComponent<StateManager>().state == StateManager.States.Waiting)
             {
@@ -153,9 +155,9 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
 
         DisplayTime(timeRemaining);
     }
-
-
     #endregion
+
+
 
     #region Private Methods
     private void StartTimer(float seconds)
