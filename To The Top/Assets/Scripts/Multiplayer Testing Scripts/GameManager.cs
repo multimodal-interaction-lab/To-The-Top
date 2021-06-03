@@ -79,15 +79,12 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
             // Check which state to use
             if (stateManager.GetComponent<StateManager>().state == StateManager.States.Waiting)
             {
-                waitText.gameObject.SetActive(true);
-                resultsText.gameObject.SetActive(false);
+                this.photonView.RPC("BeginWaitingRPC", RpcTarget.All);
                 StartTimer(waitTime);
             }
             else if (stateManager.GetComponent<StateManager>().state == StateManager.States.Playing)
             {
-                waitText.gameObject.SetActive(false);
-                resultsText.gameObject.SetActive(false);
-                StartCoroutine(BeginMessageCoroutine());
+                this.photonView.RPC("BeginPlayingRPC", RpcTarget.All);
                 StartTimer(playTime);
             }
         }
@@ -138,14 +135,16 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
                     else if (stateManager.GetComponent<StateManager>().state == StateManager.States.Playing)
                     {
                         stateManager.GetComponent<StateManager>().state = StateManager.States.Ending;
-                        resultsText.gameObject.SetActive(true);
+
+                        this.photonView.RPC("BeginEndingRPC", RpcTarget.All);
                         StartTimer(endTime);
                     }
                     else // in end state
                     {
                         stateManager.GetComponent<StateManager>().state = StateManager.States.Waiting;
                         // Change to start play again if n
-                        LeaveRoom();
+                        this.photonView.RPC("LeaveRPC", RpcTarget.All);
+                        //LeaveRoom();
                     }
                 }
             }
@@ -155,7 +154,35 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
     }
     #endregion
 
+    #region RPCs
+    [PunRPC]
+    void BeginWaitingRPC()
+    {
+        waitText.gameObject.SetActive(true);
+        resultsText.gameObject.SetActive(false);
+    }
 
+    [PunRPC]
+    void BeginPlayingRPC()
+    {
+        waitText.gameObject.SetActive(false);
+        resultsText.gameObject.SetActive(false);
+        StartCoroutine(BeginMessageCoroutine());
+    }
+
+    [PunRPC]
+    void BeginEndingRPC()
+    {
+        resultsText.gameObject.SetActive(true);
+    }
+
+    [PunRPC]
+    void LeaveRPC()
+    {
+        LeaveRoom();
+    }
+
+    #endregion
 
     #region Private Methods
     private void StartTimer(float seconds)
