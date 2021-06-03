@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
     [Tooltip("The prefab to use for representing the player")]
     public GameObject playerPrefab;
     public GameObject scoreKeeper;
-    public GameObject stateManagerPrefab;
+    public GameObject stateManager;
     public Text timerText;
     public Text waitText;
     public Text resultsText;
@@ -29,7 +29,6 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
 
     string homeScene = "TestGameMenu";
     GameObject localPlayer;
-    GameObject stateManager;
 
     float timeRemaining;
     bool timerIsRunning;
@@ -64,29 +63,15 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
             }
 
             scoreKeeper.GetComponent<Score>().heightScanner = localPlayer.transform.Find("HeightScanner").gameObject;
-            stateManager = GameObject.Find("StateManager(Clone)");
 
-            // create state manager if one was not found and this is the master client
-            if (stateManager == null && PhotonNetwork.IsMasterClient)
+            if (PhotonNetwork.IsMasterClient)
             {
-                //stateManager = Instantiate(stateManagerPrefab);
-                stateManager = PhotonNetwork.InstantiateRoomObject(stateManagerPrefab.name, new Vector3(0f, 0f, 0f), Quaternion.identity, 0);
-                stateManager.SetActive(true);
-                stateManager.GetComponent<StateManager>().state = StateManager.States.Waiting;
-                DontDestroyOnLoad(stateManager);
-            }
-
-            // Check which state to use
-            if (stateManager.GetComponent<StateManager>().state == StateManager.States.Waiting)
-            {
-                this.photonView.RPC("BeginWaitingRPC", RpcTarget.All);
                 StartTimer(waitTime);
             }
-            else if (stateManager.GetComponent<StateManager>().state == StateManager.States.Playing)
-            {
-                this.photonView.RPC("BeginPlayingRPC", RpcTarget.All);
-                StartTimer(playTime);
-            }
+
+            // Start in wait mode
+            waitText.gameObject.SetActive(true);
+            stateManager.GetComponent<StateManager>().state = StateManager.States.Waiting;
         }
     }
 
@@ -109,12 +94,13 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
 
     private void FixedUpdate()
     {
-        stateManager = GameObject.Find("StateManager(Clone)");
         if (timerIsRunning)
         {
             if (timeRemaining > 0)
             {
                 timeRemaining -= Time.deltaTime;
+
+                // Can put stuff here to happen at 10 seconds left etc...
             }
             else
             {
@@ -126,23 +112,21 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
                 if (stateManager.GetComponent<StateManager>().state == StateManager.States.Waiting)
                 {
                     stateManager.GetComponent<StateManager>().state = StateManager.States.Playing;
-                    this.photonView.RPC("BeginPlayingRPC", RpcTarget.All);
+                    waitText.gameObject.SetActive(false);
+                    resultsText.gameObject.SetActive(false);
+                    StartCoroutine(BeginMessageCoroutine());
+                    ResetScene();
                     StartTimer(playTime);
-                    //Debug.Log("Reloading Level");
-                    //PhotonNetwork.LoadLevel("Room for 4");
                 }
                 else if (stateManager.GetComponent<StateManager>().state == StateManager.States.Playing)
                 {
                     stateManager.GetComponent<StateManager>().state = StateManager.States.Ending;
-
-                    this.photonView.RPC("BeginEndingRPC", RpcTarget.All);
+                    resultsText.gameObject.SetActive(true);
                     StartTimer(endTime);
                 }
                 else // in end state going to wait state
                 {
                     stateManager.GetComponent<StateManager>().state = StateManager.States.Waiting;
-
-                    //this.photonView.RPC("LeaveRPC", RpcTarget.All);
                     LeaveRoom();
                 }
             }
@@ -154,35 +138,6 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
     }
     #endregion
 
-    #region RPCs
-    [PunRPC]
-    void BeginWaitingRPC()
-    {
-        waitText.gameObject.SetActive(true);
-        resultsText.gameObject.SetActive(false);
-    }
-
-    [PunRPC]
-    void BeginPlayingRPC()
-    {
-        waitText.gameObject.SetActive(false);
-        resultsText.gameObject.SetActive(false);
-        StartCoroutine(BeginMessageCoroutine());
-    }
-
-    [PunRPC]
-    void BeginEndingRPC()
-    {
-        resultsText.gameObject.SetActive(true);
-    }
-
-    [PunRPC]
-    void LeaveRPC()
-    {
-        LeaveRoom();
-    }
-
-    #endregion
 
     #region Private Methods
     private void StartTimer(float seconds)
@@ -197,6 +152,19 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
         float seconds = Mathf.FloorToInt(timeToDisplay % 60);
 
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+
+    private void ResetScene()
+    {
+        // Find and despawn all building blocks
+        BuildingBlock[] buildingBlocks = FindObjectsOfType<BuildingBlock>();
+        foreach(BuildingBlock block in buildingBlocks)
+        {
+            block.Despawn();
+        }
+
+        // Clear penalties
+        scoreKeeper.GetComponent<Score>().penalties = new int[4];
     }
     #endregion
 
