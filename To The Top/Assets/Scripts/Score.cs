@@ -28,17 +28,32 @@ public class Score : MonoBehaviourPun, IPunObservable
 
         if (stream.IsWriting)
         {
-            stream.SendNext(scores);
-            stream.SendNext(heights);
-            stream.SendNext(heightsNorm);
-            stream.SendNext(penalties);
+            stream.SendNext(localPlayerNumber);
+            stream.SendNext(scores[localPlayerNumber - 1]);
+            stream.SendNext(heights[localPlayerNumber - 1]);
+            stream.SendNext(heightsNorm[localPlayerNumber - 1]);
+            stream.SendNext(penalties[localPlayerNumber - 1]);
+
+            /*
+        stream.SendNext(scores);
+        stream.SendNext(heights);
+        stream.SendNext(heightsNorm);
+        stream.SendNext(penalties);*/
         }
         else
         {
+            int receivedPlayerNumber = (int)stream.ReceiveNext();
+            this.scores[receivedPlayerNumber - 1] = (int)stream.ReceiveNext();
+            this.heights[receivedPlayerNumber - 1] = (float)stream.ReceiveNext();
+            this.heightsNorm[receivedPlayerNumber - 1] = (float)stream.ReceiveNext();
+            this.penalties[receivedPlayerNumber - 1] = (int)stream.ReceiveNext();
+
+            /*
             this.scores = (int[])stream.ReceiveNext();
             this.heights = (float[])stream.ReceiveNext();
             this.heightsNorm = (float[])stream.ReceiveNext();
             this.penalties = (int[])stream.ReceiveNext();
+            */
         }
 
     }
@@ -79,7 +94,7 @@ public class Score : MonoBehaviourPun, IPunObservable
 
     public void DisplayResults()
     {
-       // heightNormText.gameObject.SetActive(false);
+        // heightNormText.gameObject.SetActive(false);
         //scoreText.gameObject.SetActive(false);
         //penaltyText.gameObject.SetActive(false);
         resultsText.gameObject.SetActive(true);
@@ -90,7 +105,7 @@ public class Score : MonoBehaviourPun, IPunObservable
         resultsText.text = "Player " + winner + " wins!\n\n";
         for (int i = 1; i <= PhotonNetwork.CurrentRoom.PlayerCount; i++)
         {
-            resultsText.text += "Player " + i + ": " + scores[i-1] + "\n";
+            resultsText.text += "Player " + i + ": " + scores[i - 1] + "\n";
         }
     }
 
