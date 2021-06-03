@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a3a7b8ad96cd604e8a8bfdb647de6c0, type: 3}
+  m_Name: Block Vanish
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: 177e28df6b7755c45a964e0faa045a74, type: 3}
+  volume: 1
+  maxPitch: 1.1
+  minPitch: 0.9
+  alts: []
