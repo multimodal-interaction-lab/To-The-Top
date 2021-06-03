@@ -109,46 +109,45 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
 
     private void FixedUpdate()
     {
-        // Only decrement timer if master client
-        if (PhotonNetwork.IsMasterClient)
+        stateManager = GameObject.Find("StateManager(Clone)");
+        if (timerIsRunning)
         {
             if (timerIsRunning)
+            if (timeRemaining > 0)
             {
-                if (timeRemaining > 0)
+                timeRemaining -= Time.deltaTime;
+            }
+            else
+            {
+                Debug.Log("Time has run out!");
+                timeRemaining = 0;
+                timerIsRunning = false;
+
+                // Move to next state
+                if (stateManager.GetComponent<StateManager>().state == StateManager.States.Waiting)
                 {
-                    timeRemaining -= Time.deltaTime;
+                    stateManager.GetComponent<StateManager>().state = StateManager.States.Playing;
+                    this.photonView.RPC("BeginPlayingRPC", RpcTarget.All);
+                    StartTimer(playTime);
+                    //Debug.Log("Reloading Level");
+                    //PhotonNetwork.LoadLevel("Room for 4");
                 }
-                else
+                else if (stateManager.GetComponent<StateManager>().state == StateManager.States.Playing)
                 {
-                    Debug.Log("Time has run out!");
-                    timeRemaining = 0;
-                    timerIsRunning = false;
+                    stateManager.GetComponent<StateManager>().state = StateManager.States.Ending;
 
-                    // Move to next state
-                    if (stateManager.GetComponent<StateManager>().state == StateManager.States.Waiting)
-                    {
-                        stateManager.GetComponent<StateManager>().state = StateManager.States.Playing;
-                        this.photonView.RPC("BeginPlayingRPC", RpcTarget.All);
-                        StartTimer(playTime);
-                        //Debug.Log("Reloading Level");
-                        //PhotonNetwork.LoadLevel("Room for 4");
-                    }
-                    else if (stateManager.GetComponent<StateManager>().state == StateManager.States.Playing)
-                    {
-                        stateManager.GetComponent<StateManager>().state = StateManager.States.Ending;
+                    this.photonView.RPC("BeginEndingRPC", RpcTarget.All);
+                    StartTimer(endTime);
+                }
+                else // in end state going to wait state
+                {
+                    stateManager.GetComponent<StateManager>().state = StateManager.States.Waiting;
 
-                        this.photonView.RPC("BeginEndingRPC", RpcTarget.All);
-                        StartTimer(endTime);
-                    }
-                    else // in end state going to wait state
-                    {
-                        stateManager.GetComponent<StateManager>().state = StateManager.States.Waiting;
-
-                        this.photonView.RPC("LeaveRPC", RpcTarget.All);
-                        //LeaveRoom();
-                    }
+                    //this.photonView.RPC("LeaveRPC", RpcTarget.All);
+                    LeaveRoom();
                 }
             }
+
         }
 
 
