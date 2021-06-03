@@ -11,12 +11,16 @@ public class BuildingBlock : MonoBehaviourPun
     public int playerNum;   // which player spawned this block
     
     public SFXAsset despawnSound;
+    public SFXAsset hitSound;
+    public SFXAsset hardHitSound;
 
     AudioSource audioSrc;
     Rigidbody rigidbody;
     bool fresh = true;
     bool despawning = false;
     float timeFromDespawn;
+
+    bool hitSoundPlayed;
 
     void Start()
     {
@@ -43,7 +47,10 @@ public class BuildingBlock : MonoBehaviourPun
             }
         }
     }
-
+    private void LateUpdate()
+    {
+        hitSoundPlayed = false;
+    }
     public void BlockGrasped()
     {
 
@@ -124,5 +131,34 @@ public class BuildingBlock : MonoBehaviourPun
     public void PlayDespawnSound()
     {
         AudioManager.Instance.PlaySFX(despawnSound, audioSrc);
+    }
+    
+    public void PreventHitSoundThisFrame()
+    {
+        hitSoundPlayed = true;
+    }
+    void OnCollisionEnter(Collision collision)
+    {
+        //Dont make sound if hand is is the one colliding
+        if (!hitSoundPlayed && collision.gameObject.layer != 9)
+        {
+            //If colliding with block, make sure to only play one sound
+            if(collision.gameObject.layer == 8)
+            {
+                collision.gameObject.GetComponent<BuildingBlock>().PreventHitSoundThisFrame();
+            }
+
+            if(collision.relativeVelocity.magnitude > 3.5f) {
+
+                AudioManager.Instance.PlaySFX(hardHitSound, audioSrc);
+                hitSoundPlayed = true;
+            }
+            else if (collision.relativeVelocity.magnitude > 1f)
+            {
+                AudioManager.Instance.PlaySFX(hitSound, audioSrc);
+                hitSoundPlayed = true;
+            }
+
+        }
     }
 }

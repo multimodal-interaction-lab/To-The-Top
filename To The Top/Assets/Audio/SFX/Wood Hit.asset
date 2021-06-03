@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a3a7b8ad96cd604e8a8bfdb647de6c0, type: 3}
+  m_Name: Wood Hit
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: d73c8ae38f17de240ada88b9ba2aa5f9, type: 3}
+  volume: 1
+  maxPitch: 1.3
+  minPitch: 0.7
+  alts:
+  - {fileID: 8300000, guid: 5e2b40ad19069a74ca9fa2ca99c1a0bb, type: 3}
+  - {fileID: 8300000, guid: 01beceac5dec17b498b7b147b00f8728, type: 3}
+  - {fileID: 8300000, guid: e5356176e07f62c4d87c8c652b2a7af7, type: 3}
