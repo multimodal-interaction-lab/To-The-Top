@@ -100,6 +100,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _OnUnpress:
     m_PersistentCalls:
       m_Calls: []
@@ -136,6 +147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blockToSpawn: {fileID: 4666272775720269085, guid: 8d5d266278090604eb4431606aa66bc1,
     type: 3}
+  pressSFX: {fileID: 11400000, guid: ac76d01adfa04c3448187fdb94f0f57b, type: 2}
 --- !u!1 &8766583570260362310
 GameObject:
   m_ObjectHideFlags: 0
