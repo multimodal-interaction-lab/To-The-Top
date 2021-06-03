@@ -35,7 +35,7 @@ public class Boundary : MonoBehaviourPun
                 ScoreKeeper.GetComponent<Score>().AddPenalty();
             }
 
-            ((BuildingBlock)component).BoundaryDespawn();
+            ((BuildingBlock)component).Despawn();
         }
     }
 }

@@ -5,7 +5,6 @@ using UnityEngine;
 public class SpawnButton : MonoBehaviour
 {
     public GameObject blockToSpawn;
-    public SFXAsset pressSFX;
     GameObject menuObject;  // grandparent of button
     BlockSpawnMenu menuScript; // script component of menu object
 
@@ -19,9 +18,5 @@ public class SpawnButton : MonoBehaviour
     public void Pressed()
     {
         menuScript.ButtonPressed(transform.parent.gameObject, blockToSpawn);
-        if (AudioManager.Instance != null)
-        {
-            AudioManager.Instance.PlaySFX(pressSFX);
-        }
     }
 }
