@@ -128,9 +128,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
                     if (stateManager.GetComponent<StateManager>().state == StateManager.States.Waiting)
                     {
                         stateManager.GetComponent<StateManager>().state = StateManager.States.Playing;
-
-                        if (PhotonNetwork.IsMasterClient)
-                            PhotonNetwork.LoadLevel("Room for 4");
+                        PhotonNetwork.LoadLevel("Room for 4");
                     }
                     else if (stateManager.GetComponent<StateManager>().state == StateManager.States.Playing)
                     {
@@ -139,10 +137,10 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
                         this.photonView.RPC("BeginEndingRPC", RpcTarget.All);
                         StartTimer(endTime);
                     }
-                    else // in end state
+                    else // in end state going to wait state
                     {
                         stateManager.GetComponent<StateManager>().state = StateManager.States.Waiting;
-                        // Change to start play again if n
+
                         this.photonView.RPC("LeaveRPC", RpcTarget.All);
                         //LeaveRoom();
                     }
