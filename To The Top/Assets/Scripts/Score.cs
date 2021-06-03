@@ -79,9 +79,9 @@ public class Score : MonoBehaviourPun, IPunObservable
 
     public void DisplayResults()
     {
-        heightNormText.gameObject.SetActive(false);
-        scoreText.gameObject.SetActive(false);
-        penaltyText.gameObject.SetActive(false);
+       // heightNormText.gameObject.SetActive(false);
+        //scoreText.gameObject.SetActive(false);
+        //penaltyText.gameObject.SetActive(false);
         resultsText.gameObject.SetActive(true);
 
         int highscore = scores.Max();
