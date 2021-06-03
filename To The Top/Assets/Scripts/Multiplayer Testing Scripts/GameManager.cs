@@ -122,6 +122,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
                 {
                     stateManager.GetComponent<StateManager>().state = StateManager.States.Ending;
                     resultsText.gameObject.SetActive(true);
+                    scoreKeeper.GetComponent<Score>().DisplayResults();
                     StartTimer(endTime);
                 }
                 else // in end state going to wait state
