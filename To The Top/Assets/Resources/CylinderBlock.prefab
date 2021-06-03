@@ -116,6 +116,8 @@ MonoBehaviour:
   spawnPointObject: {fileID: 0}
   playerNum: 0
   despawnSound: {fileID: 11400000, guid: f34d2d3ecb80c1f42baf945df24a0157, type: 2}
+  hitSound: {fileID: 11400000, guid: 5c1586a46e881e2419212501694b7ed6, type: 2}
+  hardHitSound: {fileID: 11400000, guid: e49107349a1a7424eac51534201b3280, type: 2}
 --- !u!54 &5350916080534166265
 Rigidbody:
   m_ObjectHideFlags: 0
