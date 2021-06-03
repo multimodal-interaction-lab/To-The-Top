@@ -35,10 +35,10 @@ public class Score : MonoBehaviourPun, IPunObservable
             stream.SendNext(penalties[localPlayerNumber - 1]);
 
             /*
-        stream.SendNext(scores);
-        stream.SendNext(heights);
-        stream.SendNext(heightsNorm);
-        stream.SendNext(penalties);*/
+            stream.SendNext(scores);
+            stream.SendNext(heights);
+            stream.SendNext(heightsNorm);
+            stream.SendNext(penalties);*/
         }
         else
         {
@@ -97,7 +97,10 @@ public class Score : MonoBehaviourPun, IPunObservable
         // heightNormText.gameObject.SetActive(false);
         //scoreText.gameObject.SetActive(false);
         //penaltyText.gameObject.SetActive(false);
+
+        this.photonView.RPC("SyncScores",RpcTarget.All, localPlayerNumber, scores[localPlayerNumber - 1]);
         resultsText.gameObject.SetActive(true);
+
 
         int highscore = scores.Max();
         int winner = scores.ToList().IndexOf(highscore) + 1;
@@ -113,5 +116,11 @@ public class Score : MonoBehaviourPun, IPunObservable
     {
         int tempScore = (10 * (int)heightsNorm[playerNum]) - penalties[playerNum];
         return tempScore;
+    }
+
+    [PunRPC]
+    void SyncScores(int receivedPlayerNum, float score)
+    {
+        scores[receivedPlayerNum - 1] = score;
     }
 }
