@@ -19,11 +19,33 @@ public class AudioManager : MonoBehaviour
 
     public MusicAsset[] playlist;
 
+    private bool isMutedMusic;
+    private bool isMutedSFX;
+    private float musicVol;
+    private float sfxVol;
+    //How much button adjusts volume (in db)
+    private const float VOL_STEP = 5f;
+    //Bounds for music and sfx
+    private const float MIN_VOL_BOUND = -70f;
+    private const float MAX_VOL_BOUND = 20f;
+
+
     private List<MusicAsset> currentPlaylist;
     private int currentPlaylistIndex;
 
     private bool musicStarted;
     private bool playingMusic;
+    #region PlayerPrefKeys
+    //Checks if default prefs need to be set (default value is 0, indicates need to setup)
+    public const string SETUP_AUDIO_INT = "audioSetup";
+    public const string MUTE_MUSIC_INT = "muteMusic";
+    public const string MUTE_SFX_INT = "muteSFX";
+    public const string VOL_MUSIC_INT = "volMusic";
+    public const string VOL_SFX_INT = "volSFX";
+    #endregion
+    public const int DEFAULT_MUSIC_VOL = 0;
+    public const int DEFAULT_SFX_VOL = 0;
+
     private bool MusicDone
     {
         get
@@ -43,6 +65,11 @@ public class AudioManager : MonoBehaviour
 
     public void Awake()
     {
+        if(PlayerPrefs.GetInt(SETUP_AUDIO_INT) == 0)
+        {
+            SetDefaultSettings();
+        }
+        RetrievePrefs();
         playingMusic = false;
         musicStarted = false;
         if (playMusicOnAwake)
@@ -62,6 +89,61 @@ public class AudioManager : MonoBehaviour
                 PlayNextInPlaylist();
             }
         }
+    }
+    void SetDefaultSettings()
+    {
+        PlayerPrefs.SetInt(VOL_SFX_INT, DEFAULT_SFX_VOL);
+        PlayerPrefs.SetInt(VOL_MUSIC_INT, DEFAULT_MUSIC_VOL);
+        PlayerPrefs.SetInt(SETUP_AUDIO_INT, 1);
+    }
+    void RetrievePrefs()
+    {
+        musicVol = PlayerPrefs.GetInt(VOL_MUSIC_INT);
+        sfxVol = PlayerPrefs.GetInt(VOL_SFX_INT);
+        isMutedMusic = PlayerPrefs.GetInt(MUTE_MUSIC_INT) == 0 ? false : true;
+        isMutedSFX = PlayerPrefs.GetInt(MUTE_SFX_INT) == 0 ? false : true;
+        UpdateMixers();
+    }
+    void UpdateMixers()
+    {
+        musicMixer.audioMixer.SetFloat("MusicVolume", isMutedMusic ? -80f : musicVol);
+        sfxMixer.audioMixer.SetFloat("SFXVolume", isMutedSFX ? -80f : sfxVol);
+    }
+    public void DecrementMusic()
+    {
+        musicVol = Mathf.Max(musicVol - VOL_STEP, MIN_VOL_BOUND);
+        PlayerPrefs.SetInt(VOL_MUSIC_INT, (int)musicVol);
+        UpdateMixers();
+    }
+    public void IncrementMusic()
+    {
+        musicVol = Mathf.Min(musicVol + VOL_STEP, MAX_VOL_BOUND);
+        PlayerPrefs.SetInt(VOL_MUSIC_INT, (int)musicVol);
+        UpdateMixers();
+    }
+    public void DecrementSFX()
+    {
+        sfxVol = Mathf.Max(sfxVol - VOL_STEP, MIN_VOL_BOUND);
+        PlayerPrefs.SetInt(VOL_SFX_INT, (int)sfxVol);
+        UpdateMixers();
+    }
+    public void IncrementSFX()
+    {
+        sfxVol = Mathf.Min(sfxVol + VOL_STEP, MAX_VOL_BOUND);
+        PlayerPrefs.SetInt(VOL_SFX_INT, (int)sfxVol);
+        UpdateMixers();
+    }
+    public void ToggleMuteMusic()
+    {
+        isMutedMusic = !isMutedMusic;
+        PlayerPrefs.SetInt(MUTE_MUSIC_INT, isMutedMusic ? 1 : 0);
+        UpdateMixers();
+    }
+    public void ToggleMuteSFX()
+    {
+        isMutedSFX = !isMutedSFX;
+        PlayerPrefs.SetInt(MUTE_SFX_INT, isMutedSFX ? 1 : 0);
+        UpdateMixers();
     }
     //Plays a given music clip
     public void PlayMusic(MusicAsset music)
