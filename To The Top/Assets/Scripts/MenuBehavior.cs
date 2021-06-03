@@ -11,6 +11,7 @@ public class MenuBehavior : MonoBehaviour
     public List<GameObject> JRObjects;      // Join room screen
     public List<GameObject> STObjects;      // Settings screen
     public List<GameObject> CDObjects;      // Credits screen
+    public List<GameObject> ASObjects;      // Assets redits screen
     public List<GameObject> QGObjects;      // Confirmation screen for quitting the game
 
     // Triggers at the beginning of the scene opening
@@ -30,6 +31,7 @@ public class MenuBehavior : MonoBehaviour
         hideObjectList(ref JRObjects);
         hideObjectList(ref STObjects);
         hideObjectList(ref CDObjects);
+        hideObjectList(ref ASObjects);
         hideObjectList(ref QGObjects);
 
         Debug.Log("Finished hiding All Elements");
@@ -81,6 +83,14 @@ public class MenuBehavior : MonoBehaviour
         menuHideAllElements();
         showObjectList(ref CDObjects);
         Debug.Log("Showing Credits");
+    }
+
+    // Switches to assets credits screen
+    public void menuAS()
+    {
+        menuHideAllElements();
+        showObjectList(ref ASObjects);
+        Debug.Log("Showing Assets credits");
     }
 
     // Switches to quit game confirmation screen
