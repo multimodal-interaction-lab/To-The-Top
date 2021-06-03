@@ -148,6 +148,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
             }
         }
 
+
         DisplayTime(timeRemaining);
     }
     #endregion

@@ -25,4 +25,9 @@ public class StateManager : MonoBehaviourPun, IPunObservable
         }
 
     }
+
+    void FixedUpdate()
+    {
+        Debug.Log("State: " + state.ToString());
+    }
 }
