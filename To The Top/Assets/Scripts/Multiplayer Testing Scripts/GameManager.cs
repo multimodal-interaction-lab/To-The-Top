@@ -128,7 +128,10 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
                     if (stateManager.GetComponent<StateManager>().state == StateManager.States.Waiting)
                     {
                         stateManager.GetComponent<StateManager>().state = StateManager.States.Playing;
-                        PhotonNetwork.LoadLevel("Room for 4");
+                        this.photonView.RPC("BeginPlayingRPC", RpcTarget.All);
+                        StartTimer(playTime);
+                        //Debug.Log("Reloading Level");
+                        //PhotonNetwork.LoadLevel("Room for 4");
                     }
                     else if (stateManager.GetComponent<StateManager>().state == StateManager.States.Playing)
                     {
