@@ -112,7 +112,6 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
         stateManager = GameObject.Find("StateManager(Clone)");
         if (timerIsRunning)
         {
-            if (timerIsRunning)
             if (timeRemaining > 0)
             {
                 timeRemaining -= Time.deltaTime;
