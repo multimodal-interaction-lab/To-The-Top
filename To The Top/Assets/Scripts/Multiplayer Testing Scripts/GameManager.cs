@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
     public float playTime = 30f;
     public float endTime = 30f;
 
-    string homeScene = "TestGameMenu";
+    string homeScene = "MainGameMenu";
     GameObject localPlayer;
 
     float timeRemaining;
