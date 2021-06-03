@@ -94,6 +94,7 @@ public class AudioManager : MonoBehaviour
     {
         PlayerPrefs.SetInt(VOL_SFX_INT, DEFAULT_SFX_VOL);
         PlayerPrefs.SetInt(VOL_MUSIC_INT, DEFAULT_MUSIC_VOL);
+        PlayerPrefs.SetInt(SETUP_AUDIO_INT, 1);
     }
     void RetrievePrefs()
     {
@@ -101,6 +102,7 @@ public class AudioManager : MonoBehaviour
         sfxVol = PlayerPrefs.GetInt(VOL_SFX_INT);
         isMutedMusic = PlayerPrefs.GetInt(MUTE_MUSIC_INT) == 0 ? false : true;
         isMutedSFX = PlayerPrefs.GetInt(MUTE_SFX_INT) == 0 ? false : true;
+        UpdateMixers();
     }
     void UpdateMixers()
     {
