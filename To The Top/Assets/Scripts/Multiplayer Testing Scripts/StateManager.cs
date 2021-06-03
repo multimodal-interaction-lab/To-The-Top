@@ -5,21 +5,29 @@ using UnityEngine;
 
 
 public enum States { Waiting, Playing, Ending };
-public class StateManager : MonoBehaviour
+public class StateManager : MonoBehaviourPun, IPunObservable
 {
 
     public enum States { Waiting, Playing, Ending };
     public States state;
 
-    // Start is called before the first frame update
-    void Start()
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
+        //throw new System.NotImplementedException();
+
+        if (stream.IsWriting)
+        {
+            stream.SendNext(state);
+        }
+        else
+        {
+            this.state = (States)stream.ReceiveNext();
+        }
 
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-
+        Debug.Log("State: " + state.ToString());
     }
 }
