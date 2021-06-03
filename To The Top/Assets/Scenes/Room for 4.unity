@@ -9957,6 +9957,11 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 3295691798558604675, guid: 5d1505c7aa29af544ba3f3169f6ed75e,
+        type: 3}
+      propertyPath: Synchronization
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3295691798558604733, guid: 5d1505c7aa29af544ba3f3169f6ed75e,
         type: 3}
       propertyPath: m_RootOrder
