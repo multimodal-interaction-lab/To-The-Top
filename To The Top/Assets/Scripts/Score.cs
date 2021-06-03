@@ -119,7 +119,7 @@ public class Score : MonoBehaviourPun, IPunObservable
     }
 
     [PunRPC]
-    void SyncScores(int receivedPlayerNum, float score)
+    void SyncScores(int receivedPlayerNum, int score)
     {
         scores[receivedPlayerNum - 1] = score;
     }
