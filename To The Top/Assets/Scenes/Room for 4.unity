@@ -776,12 +776,12 @@ PrefabInstance:
     - target: {fileID: 8174800487594812652, guid: 98c924bf41a8b834b8f1498f6b7b1dff,
         type: 3}
       propertyPath: endTime
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8174800487594812652, guid: 98c924bf41a8b834b8f1498f6b7b1dff,
         type: 3}
       propertyPath: playTime
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8174800487594812652, guid: 98c924bf41a8b834b8f1498f6b7b1dff,
         type: 3}
@@ -791,7 +791,7 @@ PrefabInstance:
     - target: {fileID: 8174800487594812652, guid: 98c924bf41a8b834b8f1498f6b7b1dff,
         type: 3}
       propertyPath: waitTime
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8174800487594812652, guid: 98c924bf41a8b834b8f1498f6b7b1dff,
         type: 3}

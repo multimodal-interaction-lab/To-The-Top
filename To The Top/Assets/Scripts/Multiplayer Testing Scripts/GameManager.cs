@@ -69,7 +69,9 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
             // create state manager if one was not found and this is the master client
             if (stateManager == null && PhotonNetwork.IsMasterClient)
             {
-                stateManager = Instantiate(stateManagerPrefab);
+                //stateManager = Instantiate(stateManagerPrefab);
+                stateManager = PhotonNetwork.InstantiateRoomObject(stateManagerPrefab.name, new Vector3(0f, 0f, 0f), Quaternion.identity, 0);
+                stateManager.SetActive(true);
                 stateManager.GetComponent<StateManager>().state = StateManager.States.Waiting;
                 DontDestroyOnLoad(stateManager);
             }
@@ -78,6 +80,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
             if (stateManager.GetComponent<StateManager>().state == StateManager.States.Waiting)
             {
                 waitText.gameObject.SetActive(true);
+                resultsText.gameObject.SetActive(false);
                 StartTimer(waitTime);
             }
             else if (stateManager.GetComponent<StateManager>().state == StateManager.States.Playing)
@@ -138,7 +141,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
                         resultsText.gameObject.SetActive(true);
                         StartTimer(endTime);
                     }
-                    else
+                    else // in end state
                     {
                         stateManager.GetComponent<StateManager>().state = StateManager.States.Waiting;
                         // Change to start play again if n
