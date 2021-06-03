@@ -14,10 +14,18 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
     public GameObject scoreKeeper;
     public GameObject stateManagerPrefab;
     public Text timerText;
+    public Text waitText;
+    public Text resultsText;
+    public Text beginText;
     public Transform table1;
     public Transform table2;
     public Transform table3;
     public Transform table4;
+
+    // How long each game phase will be
+    public float waitTime = 30f;
+    public float playTime = 30f;
+    public float endTime = 30f;
 
     string homeScene = "TestGameMenu";
     GameObject localPlayer;
@@ -56,26 +64,51 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
             }
 
             scoreKeeper.GetComponent<Score>().heightScanner = localPlayer.transform.Find("HeightScanner").gameObject;
-            stateManager = GameObject.Find("StateManager");
+            stateManager = GameObject.Find("StateManager(Clone)");
 
             // create state manager if one was not found and this is the master client
             if (stateManager == null && PhotonNetwork.IsMasterClient)
             {
-                stateManager = Instantiate(stateManagerPrefab);
+                //stateManager = Instantiate(stateManagerPrefab);
+                stateManager = PhotonNetwork.InstantiateRoomObject(stateManagerPrefab.name, new Vector3(0f, 0f, 0f), Quaternion.identity, 0);
+                stateManager.SetActive(true);
                 stateManager.GetComponent<StateManager>().state = StateManager.States.Waiting;
                 DontDestroyOnLoad(stateManager);
             }
 
-            StartTimer(30f);
+            // Check which state to use
+            if (stateManager.GetComponent<StateManager>().state == StateManager.States.Waiting)
+            {
+                waitText.gameObject.SetActive(true);
+                resultsText.gameObject.SetActive(false);
+                StartTimer(waitTime);
+            }
+            else if (stateManager.GetComponent<StateManager>().state == StateManager.States.Playing)
+            {
+                waitText.gameObject.SetActive(false);
+                resultsText.gameObject.SetActive(false);
+                StartCoroutine(BeginMessageCoroutine());
+                StartTimer(playTime);
+            }
         }
     }
 
-    private void StartTimer(float seconds)
+    IEnumerator BeginMessageCoroutine()
     {
-        timerIsRunning = true;
-        timeRemaining = seconds;
-    }
+        beginText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1f);
 
+        // Fade out
+        Color lerpedColor = beginText.color;
+        while (beginText.color.a >= 0.01)
+        {
+            lerpedColor = Color.Lerp(lerpedColor, Color.clear, 0.07f);
+            beginText.color = lerpedColor;
+            yield return null;
+        }
+
+        beginText.gameObject.SetActive(false);
+    }
 
     private void FixedUpdate()
     {
@@ -93,14 +126,44 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
                     Debug.Log("Time has run out!");
                     timeRemaining = 0;
                     timerIsRunning = false;
+
+                    // Move to next state
+                    if (stateManager.GetComponent<StateManager>().state == StateManager.States.Waiting)
+                    {
+                        stateManager.GetComponent<StateManager>().state = StateManager.States.Playing;
+
+                        if (PhotonNetwork.IsMasterClient)
+                            PhotonNetwork.LoadLevel("Room for 4");
+                    }
+                    else if (stateManager.GetComponent<StateManager>().state == StateManager.States.Playing)
+                    {
+                        stateManager.GetComponent<StateManager>().state = StateManager.States.Ending;
+                        resultsText.gameObject.SetActive(true);
+                        StartTimer(endTime);
+                    }
+                    else // in end state
+                    {
+                        stateManager.GetComponent<StateManager>().state = StateManager.States.Waiting;
+                        // Change to start play again if n
+                        LeaveRoom();
+                    }
                 }
             }
         }
 
         DisplayTime(timeRemaining);
     }
+    #endregion
 
-    void DisplayTime(float timeToDisplay)
+
+
+    #region Private Methods
+    private void StartTimer(float seconds)
+    {
+        timerIsRunning = true;
+        timeRemaining = seconds;
+    }
+    private void DisplayTime(float timeToDisplay)
     {
 
         float minutes = Mathf.FloorToInt(timeToDisplay / 60);
@@ -108,9 +171,6 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
 
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
-    #endregion
-
-    #region Game flow control
     #endregion
 
     #region Photon Callbacks
