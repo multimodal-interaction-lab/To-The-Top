@@ -107,6 +107,11 @@ public class BuildingBlock : MonoBehaviourPun
             yield return new WaitForSeconds(.01f);
         }
 
+        while (audioSrc.isPlaying)
+        {
+            yield return new WaitForSeconds(.2f);
+        }
+
         if (PhotonNetwork.IsConnected == true)
         {
             PhotonNetwork.Destroy(gameObject);
