@@ -118,9 +118,9 @@ public class AudioManager : MonoBehaviour
     }
     void UpdateReadouts()
     {
-        var sfxStringVal = ((int)sfxVol + 80) + "%";
+        var sfxStringVal = "Vol: " + ((int)sfxVol + 80) + "%";
         sfxReadText.text = sfxStringVal;
-        var musicStringVal = ((int)musicVol + 80) + "%";
+        var musicStringVal = "Vol: " + ((int)musicVol + 80) + "%";
         musicReadText.text = musicStringVal;
     }
     void UpdateMuted()
