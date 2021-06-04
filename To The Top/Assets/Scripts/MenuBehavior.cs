@@ -14,6 +14,8 @@ public class MenuBehavior : MonoBehaviour
     public List<GameObject> ASObjects;      // Assets redits screen
     public List<GameObject> QGObjects;      // Confirmation screen for quitting the game
 
+    public List<GameObject> InteractionHands; //Reference to the interaction hands (part with the colliders)
+
     // Triggers at the beginning of the scene opening
     void Start()
     {
@@ -42,7 +44,7 @@ public class MenuBehavior : MonoBehaviour
     {
         menuHideAllElements();          // Hides all elements
         showObjectList(ref MMObjects);  // Shows only the elements in the main menu
-
+        PauseInteraction(.3f);
         Debug.Log("Showing main menu screen");
     }
 
@@ -51,6 +53,7 @@ public class MenuBehavior : MonoBehaviour
     {
         menuHideAllElements();
         showObjectList(ref MPObjects);
+        PauseInteraction(.3f);
         Debug.Log("Showing multiplayer select screen");
     }
 
@@ -74,6 +77,7 @@ public class MenuBehavior : MonoBehaviour
     {
         menuHideAllElements();
         showObjectList(ref STObjects);
+        PauseInteraction(.3f);
         Debug.Log("Showing settings screen");
     }   
 
@@ -82,6 +86,7 @@ public class MenuBehavior : MonoBehaviour
     {
         menuHideAllElements();
         showObjectList(ref CDObjects);
+        PauseInteraction(.3f);
         Debug.Log("Showing Credits");
     }
 
@@ -90,6 +95,7 @@ public class MenuBehavior : MonoBehaviour
     {
         menuHideAllElements();
         showObjectList(ref ASObjects);
+        PauseInteraction(.5f);
         Debug.Log("Showing Assets credits");
     }
 
@@ -98,6 +104,7 @@ public class MenuBehavior : MonoBehaviour
     {
         menuHideAllElements();
         showObjectList(ref QGObjects);
+        PauseInteraction(.3f);
         Debug.Log("Showing quit game confirmation");
     }
 
@@ -138,5 +145,22 @@ public class MenuBehavior : MonoBehaviour
     public void joinMPGame()
     {
         Debug.Log("Attempted to join a random MP game");
+    }
+
+    public void PauseInteraction(float duration)
+    {
+        foreach(GameObject obj in InteractionHands)
+        {
+            obj.SetActive(false);
+        }
+        Invoke("ResumeInteraction", duration);
+    }
+
+    public void ResumeInteraction()
+    {
+        foreach (GameObject obj in InteractionHands)
+        {
+            obj.SetActive(true);
+        }
     }
 }

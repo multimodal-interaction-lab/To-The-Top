@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using TMPro;
 
 public class AudioManager : MonoBehaviour
 {
@@ -19,6 +20,12 @@ public class AudioManager : MonoBehaviour
 
     public MusicAsset[] playlist;
 
+
+    public TextMeshPro sfxReadText;
+    public TextMeshPro musicReadText;
+    public TextMeshPro sfxMutedText;
+    public TextMeshPro musicMutedText;
+
     private bool isMutedMusic;
     private bool isMutedSFX;
     private float musicVol;
@@ -26,7 +33,7 @@ public class AudioManager : MonoBehaviour
     //How much button adjusts volume (in db)
     private const float VOL_STEP = 5f;
     //Bounds for music and sfx
-    private const float MIN_VOL_BOUND = -70f;
+    private const float MIN_VOL_BOUND = -80f;
     private const float MAX_VOL_BOUND = 20f;
 
 
@@ -43,8 +50,8 @@ public class AudioManager : MonoBehaviour
     public const string VOL_MUSIC_INT = "volMusic";
     public const string VOL_SFX_INT = "volSFX";
     #endregion
-    public const int DEFAULT_MUSIC_VOL = 0;
-    public const int DEFAULT_SFX_VOL = 0;
+    private const int DEFAULT_MUSIC_VOL = 0;
+    private const int DEFAULT_SFX_VOL = 0;
 
     private bool MusicDone
     {
@@ -103,47 +110,81 @@ public class AudioManager : MonoBehaviour
         isMutedMusic = PlayerPrefs.GetInt(MUTE_MUSIC_INT) == 0 ? false : true;
         isMutedSFX = PlayerPrefs.GetInt(MUTE_SFX_INT) == 0 ? false : true;
         UpdateMixers();
+        UpdateReadouts();
+        UpdateMuted();
     }
     void UpdateMixers()
     {
         musicMixer.audioMixer.SetFloat("MusicVolume", isMutedMusic ? -80f : musicVol);
         sfxMixer.audioMixer.SetFloat("SFXVolume", isMutedSFX ? -80f : sfxVol);
     }
+    void UpdateReadouts()
+    {
+        if (sfxReadText != null)
+        {
+            var sfxStringVal = ((int)sfxVol + 80) + "%";
+            sfxReadText.text = sfxStringVal;
+        }
+        if (musicReadText != null)
+        {
+            var musicStringVal = ((int)musicVol + 80) + "%";
+            musicReadText.text = musicStringVal;
+        }
+    }
+    void UpdateMuted()
+    {
+        if (sfxMutedText != null)
+        {
+            sfxMutedText.text = isMutedSFX ? "Unmute" : "Mute";
+            sfxMutedText.fontSize = isMutedSFX ? 23f : 25f;
+        }
+        if (musicMutedText != null)
+        {
+            musicMutedText.text = isMutedMusic ? "Unmute" : "Mute";
+            musicMutedText.fontSize = isMutedMusic ? 23f : 25f;
+        }
+    }
     public void DecrementMusic()
     {
         musicVol = Mathf.Max(musicVol - VOL_STEP, MIN_VOL_BOUND);
         PlayerPrefs.SetInt(VOL_MUSIC_INT, (int)musicVol);
         UpdateMixers();
+        UpdateReadouts();
     }
     public void IncrementMusic()
     {
         musicVol = Mathf.Min(musicVol + VOL_STEP, MAX_VOL_BOUND);
         PlayerPrefs.SetInt(VOL_MUSIC_INT, (int)musicVol);
         UpdateMixers();
+        UpdateReadouts();
     }
     public void DecrementSFX()
     {
         sfxVol = Mathf.Max(sfxVol - VOL_STEP, MIN_VOL_BOUND);
         PlayerPrefs.SetInt(VOL_SFX_INT, (int)sfxVol);
         UpdateMixers();
+        UpdateReadouts();
     }
     public void IncrementSFX()
     {
         sfxVol = Mathf.Min(sfxVol + VOL_STEP, MAX_VOL_BOUND);
         PlayerPrefs.SetInt(VOL_SFX_INT, (int)sfxVol);
         UpdateMixers();
+        UpdateReadouts();
     }
     public void ToggleMuteMusic()
     {
         isMutedMusic = !isMutedMusic;
         PlayerPrefs.SetInt(MUTE_MUSIC_INT, isMutedMusic ? 1 : 0);
         UpdateMixers();
+        UpdateMuted();
     }
     public void ToggleMuteSFX()
     {
         isMutedSFX = !isMutedSFX;
         PlayerPrefs.SetInt(MUTE_SFX_INT, isMutedSFX ? 1 : 0);
         UpdateMixers();
+        UpdateMuted();
     }
     //Plays a given music clip
     public void PlayMusic(MusicAsset music)
