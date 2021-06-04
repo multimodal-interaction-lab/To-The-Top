@@ -25,7 +25,7 @@ public class Score : MonoBehaviourPun, IPunObservable
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         //throw new System.NotImplementedException();
-
+        /*
         if (stream.IsWriting)
         {
             stream.SendNext(localPlayerNumber);
@@ -34,11 +34,6 @@ public class Score : MonoBehaviourPun, IPunObservable
             stream.SendNext(heightsNorm[localPlayerNumber - 1]);
             stream.SendNext(penalties[localPlayerNumber - 1]);
 
-            /*
-            stream.SendNext(scores);
-            stream.SendNext(heights);
-            stream.SendNext(heightsNorm);
-            stream.SendNext(penalties);*/
         }
         else
         {
@@ -48,13 +43,8 @@ public class Score : MonoBehaviourPun, IPunObservable
             this.heightsNorm[receivedPlayerNumber - 1] = (float)stream.ReceiveNext();
             this.penalties[receivedPlayerNumber - 1] = (int)stream.ReceiveNext();
 
-            /*
-            this.scores = (int[])stream.ReceiveNext();
-            this.heights = (float[])stream.ReceiveNext();
-            this.heightsNorm = (float[])stream.ReceiveNext();
-            this.penalties = (int[])stream.ReceiveNext();
-            */
         }
+        */
 
     }
 
@@ -106,7 +96,7 @@ public class Score : MonoBehaviourPun, IPunObservable
         //penaltyText.gameObject.SetActive(false);
 
 
-        this.photonView.RPC("SyncScores", RpcTarget.All, localPlayerNumber, scores[localPlayerNumber - 1]);
+        this.photonView.RPC("SyncScores", RpcTarget.AllBuffered, localPlayerNumber, scores[localPlayerNumber - 1]);
         resultsText.gameObject.SetActive(true);
 
 
