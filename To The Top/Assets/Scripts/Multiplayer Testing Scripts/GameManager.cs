@@ -12,16 +12,23 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
     [Tooltip("The prefab to use for representing the player")]
     public GameObject playerPrefab;
     public GameObject scoreKeeper;
-    public GameObject stateManagerPrefab;
+    public GameObject stateManager;
     public Text timerText;
+    public Text waitText;
+    public Text resultsText;
+    public Text beginText;
     public Transform table1;
     public Transform table2;
     public Transform table3;
     public Transform table4;
 
-    string homeScene = "TestGameMenu";
+    // How long each game phase will be
+    public float waitTime = 30f;
+    public float playTime = 30f;
+    public float endTime = 30f;
+
+    string homeScene = "MainGameMenu";
     GameObject localPlayer;
-    GameObject stateManager;
 
     float timeRemaining;
     bool timerIsRunning;
@@ -56,51 +63,89 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
             }
 
             scoreKeeper.GetComponent<Score>().heightScanner = localPlayer.transform.Find("HeightScanner").gameObject;
-            stateManager = GameObject.Find("StateManager");
 
-            // create state manager if one was not found and this is the master client
-            if (stateManager == null && PhotonNetwork.IsMasterClient)
+            if (PhotonNetwork.IsMasterClient)
             {
-                stateManager = Instantiate(stateManagerPrefab);
-                stateManager.GetComponent<StateManager>().state = StateManager.States.Waiting;
-                DontDestroyOnLoad(stateManager);
+                StartTimer(waitTime);
             }
 
-            StartTimer(30f);
+            // Start in wait mode
+            waitText.gameObject.SetActive(true);
+            stateManager.GetComponent<StateManager>().state = StateManager.States.Waiting;
         }
     }
 
+    IEnumerator BeginMessageCoroutine()
+    {
+        beginText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1f);
+
+        // Fade out
+        Color lerpedColor = beginText.color;
+        while (beginText.color.a >= 0.01)
+        {
+            lerpedColor = Color.Lerp(lerpedColor, Color.clear, 0.07f);
+            beginText.color = lerpedColor;
+            yield return null;
+        }
+
+        beginText.gameObject.SetActive(false);
+    }
+
+    private void FixedUpdate()
+    {
+        if (timerIsRunning)
+        {
+            if (timeRemaining > 0)
+            {
+                timeRemaining -= Time.deltaTime;
+
+                // Can put stuff here to happen at 10 seconds left etc...
+            }
+            else
+            {
+                Debug.Log("Time has run out!");
+                timeRemaining = 0;
+                timerIsRunning = false;
+
+                // Move to next state
+                if (stateManager.GetComponent<StateManager>().state == StateManager.States.Waiting)
+                {
+                    stateManager.GetComponent<StateManager>().state = StateManager.States.Playing;
+                    waitText.gameObject.SetActive(false);
+                    resultsText.gameObject.SetActive(false);
+                    StartCoroutine(BeginMessageCoroutine());
+                    ResetScene();
+                    StartTimer(playTime);
+                }
+                else if (stateManager.GetComponent<StateManager>().state == StateManager.States.Playing)
+                {
+                    stateManager.GetComponent<StateManager>().state = StateManager.States.Ending;
+                    resultsText.gameObject.SetActive(true);
+                    StartTimer(endTime);
+                }
+                else // in end state going to wait state
+                {
+                    stateManager.GetComponent<StateManager>().state = StateManager.States.Waiting;
+                    LeaveRoom();
+                }
+            }
+
+        }
+
+
+        DisplayTime(timeRemaining);
+    }
+    #endregion
+
+
+    #region Private Methods
     private void StartTimer(float seconds)
     {
         timerIsRunning = true;
         timeRemaining = seconds;
     }
-
-
-    private void FixedUpdate()
-    {
-        // Only decrement timer if master client
-        if (PhotonNetwork.IsMasterClient)
-        {
-            if (timerIsRunning)
-            {
-                if (timeRemaining > 0)
-                {
-                    timeRemaining -= Time.deltaTime;
-                }
-                else
-                {
-                    Debug.Log("Time has run out!");
-                    timeRemaining = 0;
-                    timerIsRunning = false;
-                }
-            }
-        }
-
-        DisplayTime(timeRemaining);
-    }
-
-    void DisplayTime(float timeToDisplay)
+    private void DisplayTime(float timeToDisplay)
     {
 
         float minutes = Mathf.FloorToInt(timeToDisplay / 60);
@@ -108,9 +153,19 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
 
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
-    #endregion
 
-    #region Game flow control
+    private void ResetScene()
+    {
+        // Find and despawn all building blocks
+        BuildingBlock[] buildingBlocks = FindObjectsOfType<BuildingBlock>();
+        foreach(BuildingBlock block in buildingBlocks)
+        {
+            block.Despawn();
+        }
+
+        // Clear penalties
+        scoreKeeper.GetComponent<Score>().penalties = new int[4];
+    }
     #endregion
 
     #region Photon Callbacks

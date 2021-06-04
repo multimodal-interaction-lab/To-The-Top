@@ -76,14 +76,11 @@ public class Score : MonoBehaviourPun, IPunObservable
     public void AddPenalty()
     {
         penalties[localPlayerNumber - 1] += 1;
-        
-        Debug.Log("Increment penalty array at index: " + (localPlayerNumber - 1));
     }
 
     int CalculateScore(int playerNum)
     {
         int tempScore = (10 * (int)heightsNorm[playerNum]) - penalties[playerNum];
-        Debug.Log("Player " + (playerNum)+ ", hNorm " + heightsNorm[playerNum] + ", pen " + penalties[playerNum] + ", score " + tempScore);
         return tempScore;
     }
 }
