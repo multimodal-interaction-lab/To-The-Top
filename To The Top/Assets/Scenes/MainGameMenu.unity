@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.43669325, g: 0.48429316, b: 0.5645426, a: 1}
+  m_IndirectSpecularColor: {r: 0.43669343, g: 0.48429376, b: 0.5645432, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1251,7 +1251,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 4.859, y: 36.438, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.451, y: 0.1299999}
+  m_AnchoredPosition: {x: 0.48, y: 0.1299999}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &163909645
@@ -15273,7 +15273,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 4.859, y: 36.438, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.453, y: 0.308}
+  m_AnchoredPosition: {x: 0.48, y: 0.308}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1755129590
@@ -16705,6 +16705,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3560029392611300697, guid: 7259675a152c83047b5a37f3522e5bb8,
+        type: 3}
+      propertyPath: sfxReadText
+      value: 
+      objectReference: {fileID: 160975464}
+    - target: {fileID: 3560029392611300697, guid: 7259675a152c83047b5a37f3522e5bb8,
+        type: 3}
+      propertyPath: sfxMutedText
+      value: 
+      objectReference: {fileID: 315920206}
+    - target: {fileID: 3560029392611300697, guid: 7259675a152c83047b5a37f3522e5bb8,
+        type: 3}
+      propertyPath: musicReadText
+      value: 
+      objectReference: {fileID: 1752955714}
+    - target: {fileID: 3560029392611300697, guid: 7259675a152c83047b5a37f3522e5bb8,
+        type: 3}
+      propertyPath: musicMutedText
+      value: 
+      objectReference: {fileID: 2067428299}
     - target: {fileID: 3560029392611300699, guid: 7259675a152c83047b5a37f3522e5bb8,
         type: 3}
       propertyPath: m_Name

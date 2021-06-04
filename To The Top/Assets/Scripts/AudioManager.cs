@@ -110,6 +110,8 @@ public class AudioManager : MonoBehaviour
         isMutedMusic = PlayerPrefs.GetInt(MUTE_MUSIC_INT) == 0 ? false : true;
         isMutedSFX = PlayerPrefs.GetInt(MUTE_SFX_INT) == 0 ? false : true;
         UpdateMixers();
+        UpdateReadouts();
+        UpdateMuted();
     }
     void UpdateMixers()
     {
@@ -120,12 +122,12 @@ public class AudioManager : MonoBehaviour
     {
         if (sfxReadText != null)
         {
-            var sfxStringVal = "Vol: " + ((int)sfxVol + 80) + "%";
+            var sfxStringVal = ((int)sfxVol + 80) + "%";
             sfxReadText.text = sfxStringVal;
         }
         if (musicReadText != null)
         {
-            var musicStringVal = "Vol: " + ((int)musicVol + 80) + "%";
+            var musicStringVal = ((int)musicVol + 80) + "%";
             musicReadText.text = musicStringVal;
         }
     }
