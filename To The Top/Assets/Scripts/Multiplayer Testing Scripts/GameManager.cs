@@ -66,9 +66,8 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
 
             scoreKeeper.GetComponent<Score>().heightScanner = localPlayer.transform.Find("HeightScanner").gameObject;
 
-            state = States.Waiting;
-            waitText.gameObject.SetActive(true);
-            
+
+
             // Start in wait mode
             if (PhotonNetwork.IsMasterClient)
             {
@@ -99,6 +98,12 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
 
     private void FixedUpdate()
     {
+
+        if (state == States.Waiting && PhotonNetwork.IsMasterClient)
+        {
+            this.photonView.RPC("StartWaiting", RpcTarget.All);
+        }
+
         if (timerIsRunning)
         {
             if (timeRemaining > 0)
@@ -117,19 +122,16 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
                 // Move to next state
                 if (state == States.Waiting && PhotonNetwork.IsMasterClient)
                 {
-                    state = States.Playing;
                     this.photonView.RPC("StartPlaying", RpcTarget.All);
                     StartTimer(playTime);
                 }
                 else if (state == States.Playing && PhotonNetwork.IsMasterClient)
                 {
-                    state = States.Ending;
                     this.photonView.RPC("StartEnding", RpcTarget.All);
                     StartTimer(endTime);
                 }
-                else // in end state so leave room once timer is out
+                else if (state == States.Ending) // in end state so leave room once timer is out
                 {
-                    state = States.Waiting;
                     LeaveRoom();
                 }
             }
@@ -146,6 +148,8 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
     [PunRPC]
     void StartWaiting()
     {
+        state = States.Waiting;
+        waitText.gameObject.SetActive(true);
         Debug.Log("StartWaiting RPC called");
     }
 
@@ -153,6 +157,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
     void StartPlaying()
     {
         Debug.Log("StartPlaying RPC called");
+        state = States.Playing;
         waitText.gameObject.SetActive(false);
         resultsText.gameObject.SetActive(false);
         StartCoroutine(BeginMessageCoroutine());
@@ -163,6 +168,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
     void StartEnding()
     {
         Debug.Log("StartEnding RPC called");
+        state = States.Ending;
         resultsText.gameObject.SetActive(true);
         scoreKeeper.GetComponent<Score>().DisplayResults();
     }
@@ -237,13 +243,11 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
         {
             stream.SendNext(timeRemaining);
             stream.SendNext(timerIsRunning);
-            stream.SendNext(state);
         }
         else
         {
             this.timeRemaining = (float)stream.ReceiveNext();
             this.timerIsRunning = (bool)stream.ReceiveNext();
-            this.state = (States)stream.ReceiveNext();
         }
     }
 
