@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
             if (PhotonNetwork.IsMasterClient)
             {
                 StartTimer(waitTime);
-                this.photonView.RPC("StartWaiting", RpcTarget.All);
+                this.photonView.RPC("StartWaiting", RpcTarget.AllBuffered);
             }
 
 
@@ -98,11 +98,12 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
 
     private void FixedUpdate()
     {
-
+        /*
         if (state == States.Waiting && PhotonNetwork.IsMasterClient)
         {
             this.photonView.RPC("StartWaiting", RpcTarget.All);
         }
+        */
 
         if (timerIsRunning)
         {
@@ -122,12 +123,12 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
                 // Move to next state
                 if (state == States.Waiting && PhotonNetwork.IsMasterClient)
                 {
-                    this.photonView.RPC("StartPlaying", RpcTarget.All);
+                    this.photonView.RPC("StartPlaying", RpcTarget.AllBuffered);
                     StartTimer(playTime);
                 }
                 else if (state == States.Playing && PhotonNetwork.IsMasterClient)
                 {
-                    this.photonView.RPC("StartEnding", RpcTarget.All);
+                    this.photonView.RPC("StartEnding", RpcTarget.AllBuffered);
                     StartTimer(endTime);
                 }
                 else if (state == States.Ending) // in end state so leave room once timer is out
