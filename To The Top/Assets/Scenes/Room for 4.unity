@@ -796,7 +796,7 @@ PrefabInstance:
     - target: {fileID: 3981438331389809594, guid: 98c924bf41a8b834b8f1498f6b7b1dff,
         type: 3}
       propertyPath: m_Name
-      value: GameManager
+      value: GameFlowManager
       objectReference: {fileID: 0}
     - target: {fileID: 7339903130610096370, guid: 98c924bf41a8b834b8f1498f6b7b1dff,
         type: 3}
@@ -881,7 +881,7 @@ PrefabInstance:
     - target: {fileID: 8174800487594812652, guid: 98c924bf41a8b834b8f1498f6b7b1dff,
         type: 3}
       propertyPath: playTime
-      value: 20
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 8174800487594812652, guid: 98c924bf41a8b834b8f1498f6b7b1dff,
         type: 3}
