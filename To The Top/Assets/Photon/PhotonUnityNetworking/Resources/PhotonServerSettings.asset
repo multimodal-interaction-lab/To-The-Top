@@ -38,6 +38,10 @@ MonoBehaviour:
   - DestroySpaceship
   - Fire
   - RespawnSpaceship
+  - StartEnding
+  - StartPlaying
+  - StartWaiting
+  - SyncScores
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 0

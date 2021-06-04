@@ -7,7 +7,7 @@ using Photon.Realtime;
 using Photon.Pun.UtilityScripts;
 using UnityEngine.UI;
 
-public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
+public class GameFlowManager : MonoBehaviourPunCallbacks, IPunObservable
 {
     enum States { Waiting, Playing, Ending };
     States state;
