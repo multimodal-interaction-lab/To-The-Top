@@ -17,6 +17,7 @@ public class Score : MonoBehaviourPun, IPunObservable
     public Text heightNormText;
     public Text scoreText;
     public Text penaltyText;
+    public Text winnerText;
     public Text resultsText;
 
     int localPlayerNumber;
@@ -104,7 +105,7 @@ public class Score : MonoBehaviourPun, IPunObservable
 
     int CalculateScore(int playerNum)
     {
-        int tempScore = (10 * (int)heightsNorm[playerNum]) - penalties[playerNum];
+        int tempScore = (10 * (int)heightsNorm[playerNum]) - (5 * penalties[playerNum]);
         return tempScore;
     }
 
@@ -117,10 +118,14 @@ public class Score : MonoBehaviourPun, IPunObservable
         Debug.Log("Scores[3]: " + scores[3]);
 
         resultsText.gameObject.SetActive(true);
+        winnerText.gameObject.SetActive(true);
+
+        resultsText.text = "Scores:\n";
+
         int highscore = scores.Max();
         int winner = scores.ToList().IndexOf(highscore) + 1;
 
-        resultsText.text = "Player " + winner + " wins!\n\n";
+        winnerText.text = "Player " + winner + " wins!\n\n";
         for (int i = 1; i <= PhotonNetwork.CurrentRoom.PlayerCount; i++)
         {
             resultsText.text += "Player " + i + ": " + scores[i - 1] + "\n";
