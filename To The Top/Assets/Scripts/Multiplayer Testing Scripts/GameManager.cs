@@ -140,7 +140,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
 
 
         DisplayTime(timeRemaining);
-        Debug.Log("state: " + state);
+        //Debug.Log("state: " + state);
     }
     #endregion
 
