@@ -875,6 +875,11 @@ PrefabInstance:
       objectReference: {fileID: 976137039}
     - target: {fileID: 8174800487594812652, guid: 98c924bf41a8b834b8f1498f6b7b1dff,
         type: 3}
+      propertyPath: playTime
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 8174800487594812652, guid: 98c924bf41a8b834b8f1498f6b7b1dff,
+        type: 3}
       propertyPath: waitText
       value: 
       objectReference: {fileID: 329878372}
