@@ -97,9 +97,9 @@ public class Score : MonoBehaviourPun, IPunObservable
 
 
         this.photonView.RPC("SyncScores", RpcTarget.AllBuffered, localPlayerNumber, scores[localPlayerNumber - 1]);
+        StartCoroutine(WaitForScores());
+        
         resultsText.gameObject.SetActive(true);
-
-
         int highscore = scores.Max();
         int winner = scores.ToList().IndexOf(highscore) + 1;
 
@@ -114,6 +114,11 @@ public class Score : MonoBehaviourPun, IPunObservable
     {
         int tempScore = (10 * (int)heightsNorm[playerNum]) - penalties[playerNum];
         return tempScore;
+    }
+
+    IEnumerator WaitForScores()
+    {
+        yield return new WaitForSeconds(0.5f);
     }
 
     [PunRPC]
