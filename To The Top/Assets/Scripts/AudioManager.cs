@@ -118,17 +118,29 @@ public class AudioManager : MonoBehaviour
     }
     void UpdateReadouts()
     {
-        var sfxStringVal = "Vol: " + ((int)sfxVol + 80) + "%";
-        sfxReadText.text = sfxStringVal;
-        var musicStringVal = "Vol: " + ((int)musicVol + 80) + "%";
-        musicReadText.text = musicStringVal;
+        if (sfxReadText != null)
+        {
+            var sfxStringVal = "Vol: " + ((int)sfxVol + 80) + "%";
+            sfxReadText.text = sfxStringVal;
+        }
+        if (musicReadText != null)
+        {
+            var musicStringVal = "Vol: " + ((int)musicVol + 80) + "%";
+            musicReadText.text = musicStringVal;
+        }
     }
     void UpdateMuted()
     {
-        sfxMutedText.text = isMutedSFX ? "Unmute" : "Mute";
-        sfxMutedText.fontSize = isMutedSFX ? 23f : 25f;
-        musicMutedText.text = isMutedMusic ? "Unmute" : "Mute";
-        musicMutedText.fontSize = isMutedMusic ? 23f : 25f;
+        if (sfxMutedText != null)
+        {
+            sfxMutedText.text = isMutedSFX ? "Unmute" : "Mute";
+            sfxMutedText.fontSize = isMutedSFX ? 23f : 25f;
+        }
+        if (musicMutedText != null)
+        {
+            musicMutedText.text = isMutedMusic ? "Unmute" : "Mute";
+            musicMutedText.fontSize = isMutedMusic ? 23f : 25f;
+        }
     }
     public void DecrementMusic()
     {
