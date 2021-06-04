@@ -7038,6 +7038,9 @@ MonoBehaviour:
   - {fileID: 700329656}
   - {fileID: 454435659}
   - {fileID: 1475078337}
+  InteractionHands:
+  - {fileID: 38948541}
+  - {fileID: 1323133249}
 --- !u!1 &749649704
 GameObject:
   m_ObjectHideFlags: 0
