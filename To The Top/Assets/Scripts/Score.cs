@@ -75,12 +75,6 @@ public class Score : MonoBehaviourPun, IPunObservable
         penaltyText.text = "Penalties: " + penalties[localPlayerNumber - 1];
         scoreText.text = "Score: " + scores[localPlayerNumber - 1] + " points";
 
-        /*
-        Debug.Log("Scores[0]: " + scores[0]); 
-        Debug.Log("Scores[1]: " + scores[1]);
-        Debug.Log("Scores[2]: " + scores[2]);
-        Debug.Log("Scores[3]: " + scores[3]);
-        */
     }
 
     // Called when block player spawned falls out of bounds
@@ -96,9 +90,20 @@ public class Score : MonoBehaviourPun, IPunObservable
         //penaltyText.gameObject.SetActive(false);
 
 
+        
+        Debug.Log("Scores[0]: " + scores[0]); 
+        Debug.Log("Scores[1]: " + scores[1]);
+        Debug.Log("Scores[2]: " + scores[2]);
+        Debug.Log("Scores[3]: " + scores[3]);
+        
         this.photonView.RPC("SyncScores", RpcTarget.AllBuffered, localPlayerNumber, scores[localPlayerNumber - 1]);
         StartCoroutine(WaitForScores());
-        
+
+        Debug.Log("Scores[0]: " + scores[0]);
+        Debug.Log("Scores[1]: " + scores[1]);
+        Debug.Log("Scores[2]: " + scores[2]);
+        Debug.Log("Scores[3]: " + scores[3]);
+
         resultsText.gameObject.SetActive(true);
         int highscore = scores.Max();
         int winner = scores.ToList().IndexOf(highscore) + 1;
