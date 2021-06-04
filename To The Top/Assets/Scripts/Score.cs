@@ -99,6 +99,18 @@ public class Score : MonoBehaviourPun, IPunObservable
         this.photonView.RPC("SyncScores", RpcTarget.AllBuffered, localPlayerNumber, scores[localPlayerNumber - 1]);
         StartCoroutine(WaitForScores());
 
+        
+    }
+
+    int CalculateScore(int playerNum)
+    {
+        int tempScore = (10 * (int)heightsNorm[playerNum]) - penalties[playerNum];
+        return tempScore;
+    }
+
+    IEnumerator WaitForScores()
+    {
+        yield return new WaitForSeconds(0.5f);
         Debug.Log("Scores[0]: " + scores[0]);
         Debug.Log("Scores[1]: " + scores[1]);
         Debug.Log("Scores[2]: " + scores[2]);
@@ -113,17 +125,6 @@ public class Score : MonoBehaviourPun, IPunObservable
         {
             resultsText.text += "Player " + i + ": " + scores[i - 1] + "\n";
         }
-    }
-
-    int CalculateScore(int playerNum)
-    {
-        int tempScore = (10 * (int)heightsNorm[playerNum]) - penalties[playerNum];
-        return tempScore;
-    }
-
-    IEnumerator WaitForScores()
-    {
-        yield return new WaitForSeconds(0.5f);
     }
 
     [PunRPC]
